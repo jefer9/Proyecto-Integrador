@@ -1,33 +1,33 @@
 class lector:
 
     def __init__(self, nombre, direccion, telefono):
-        self.nombre = nombre
-        self.direccion = direccion
-        self.telefono = telefono
+        self._nombre = nombre
+        self._direccion = direccion
+        self._telefono = telefono
 
     @property
     def nombre(self):
-        return self.nombre
+        return self._nombre
 
     @nombre.setter
     def nombre(self, nombre):
-        self.nombre = nombre
+        self._nombre = nombre
 
     @property
     def direccion(self):
-        return self.direccion
+        return self._direccion
 
     @direccion.setter
     def direccion(self, direccion):
-        self.direccion = direccion
+        self._direccion = direccion
 
     @property
     def telefono(self):
-        return self.telefono
+        return self._telefono
 
     @telefono.setter
     def telefono(self, telefono):
-        self.telefono = telefono
+        self._telefono = telefono
 
     #metodos
 
