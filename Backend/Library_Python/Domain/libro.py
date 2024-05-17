@@ -1,7 +1,6 @@
-
-class libro:
-
-    def __init__(self, titulo, autor, editorial, id_libro, genero, stock):
+import ConexionBD
+class Libro:
+    def __init__(self, titulo=None, autor=None, editorial=None, id_libro=None, genero=None, stock=None):
         self._titulo = titulo
         self._autor = autor
         self._editorial = editorial
@@ -56,3 +55,32 @@ class libro:
     @stock.setter
     def stock(self, stock):
         self._stock = stock
+
+    def crear_libro(self):
+        print("Ingresar el libro")
+        print("Ingresa los siguientes datos:")
+        self._titulo = input("Ingresa el título: ")
+        self._autor = input("Ingresa el autor: ")
+        self._editorial = input("Ingresa el editorial: ")
+        self._id_libro = input("Ingresa Id Libro: ")
+        self._genero = input("Ingresa género: ")
+        self._stock = input("Ingresa stock: ")
+
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
+            query = "INSERT INTO libros (titulo, autor, editorial, id_libro, genero, stock) VALUES (%s, %s, %s, %s, %s, %s)"
+            values = (self._titulo, self._autor, self._editorial, self._id_libro, self._genero, self._stock)
+            db.execute_query(query, values)
+            print("Libro agregado exitosamente")
+        except Exception as e:
+            print("Error al agregar libro:", e)
+        finally:
+            db.disconnect
+
+
+libro1 = Libro()
+libro1.crear_libro()
+
+
+
