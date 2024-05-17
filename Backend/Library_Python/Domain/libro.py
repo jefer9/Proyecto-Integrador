@@ -1,12 +1,20 @@
-import ConexionBD
+from ConexionBD import ConexionBD
 class Libro:
-    def __init__(self, titulo=None, autor=None, editorial=None, id_libro=None, genero=None, stock=None):
+    def __init__(self,id_libro=None, titulo=None, autor=None, editorial=None, genero=None, stock=None):
+        self._id_libro = id_libro
         self._titulo = titulo
         self._autor = autor
         self._editorial = editorial
-        self._id_libro = id_libro
         self._genero = genero
         self._stock = stock
+
+    @property
+    def id_libro(self):
+        return self._id_libro
+
+    @id_libro.setter
+    def id_libro(self, id_libro):
+        self._id_libro = id_libro
 
     @property
     def titulo(self):
@@ -32,13 +40,7 @@ class Libro:
     def editorial(self, editorial):
         self._editorial = editorial
 
-    @property
-    def id_libro(self):
-        return self._id_libro
 
-    @id_libro.setter
-    def id_libro(self, id_libro):
-        self._id_libro = id_libro
 
     @property
     def genero(self):
@@ -67,20 +69,19 @@ class Libro:
         self._stock = input("Ingresa stock: ")
 
         try:
-            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db = ConexionBD(host="localhost", port=3306, user="root", passwd="", database="biblioteca")
             db.connect()
-            query = "INSERT INTO libros (titulo, autor, editorial, id_libro, genero, stock) VALUES (%s, %s, %s, %s, %s, %s)"
-            values = (self._titulo, self._autor, self._editorial, self._id_libro, self._genero, self._stock)
+            query = "INSERT INTO libros (id_libro,titulo, autor, editorial, genero, stock) VALUES (%s, %s, %s, %s, %s, %s)"
+            values = (self._id_libro,self._titulo, self._autor, self._editorial, self._genero, self._stock)
             db.execute_query(query, values)
             print("Libro agregado exitosamente")
         except Exception as e:
             print("Error al agregar libro:", e)
         finally:
-            db.disconnect
+            db.disconnect()
 
-
+# Crear una instancia de la clase Libro y llamar al método crear_libro
 libro1 = Libro()
 libro1.crear_libro()
-
 
 

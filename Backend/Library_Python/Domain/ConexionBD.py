@@ -1,7 +1,7 @@
 
 import mysql.connector
 
-class ConexionDB:
+class ConexionBD:
     def __init__(self, host, port, user, passwd, database):
         self.host = host
         self.port = port
@@ -41,3 +41,5 @@ class ConexionDB:
             cursor.close()
 
 
+#db = ConexionDB(host="localhost", port=3306,user= "root", passwd = "", database = "biblioteca")
+#db.connect()

@@ -1,0 +1,51 @@
+CREATE TABLE estudiantes(
+    id_estudiante int PRIMARY KEY,
+    nombre_estudiante varchar (55),
+    apellido_estudiante varchar (55),
+    telefono_estudiante bigint,
+    email_estudiante varchar (55)
+);
+
+CREATE TABLE docentes(
+    id_docente int PRIMARY KEY,
+    nombre_docente varchar (55),
+    apellido_docente varchar (55),
+    telefono_docente bigint,
+    email_docente varchar (55)
+);
+
+CREATE TABLE pedidos(
+    id_pedido int PRIMARY KEY,
+    titulo_libro varchar(55),
+    cantidad int
+);
+
+CREATE TABLE Libros(
+    id_libro int PRIMARY KEY,
+    titulo varchar(55),
+    autor varchar (55),
+    editorial varchar (55),
+    genero varchar (55),
+    stock int
+);
+
+CREATE TABLE estudiantes_pedidos(
+    id_estudiante1 int,
+    id_pedido1 int,
+    CONSTRAINT fky_id_estud FOREIGN KEY (id_estudiante1) REFERENCES estudiantes(id_estudiante),
+    CONSTRAINT fky_id_pedido1 FOREIGN KEY (id_pedido1) REFERENCES pedidos(id_pedido)
+);
+
+CREATE TABLE docentes_pedidos(
+    id_docente1 int,
+    id_pedido2 int,
+    CONSTRAINT fky_id_docent FOREIGN KEY (id_docente1) REFERENCES docentes(id_docente),
+    CONSTRAINT fky_id_pedido2 FOREIGN KEY (id_pedido2) REFERENCES pedidos(id_pedido)
+);
+
+CREATE TABLE pedidos_libros(
+    id_pedido3 int,
+    id_libro1 int,
+    CONSTRAINT fky_id_pedido3 FOREIGN KEY (id_pedido3) REFERENCES pedidos(id_pedido),
+    CONSTRAINT fky_id_libro1 FOREIGN KEY (id_libro1) REFERENCES Libros(id_libro)
+);
