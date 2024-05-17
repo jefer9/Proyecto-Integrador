@@ -1,7 +1,6 @@
-
 import mysql.connector
 
-class ConexionDB:
+class ConexionBD:
     def __init__(self, host, port, user, passwd, database):
         self.host = host
         self.port = port
@@ -39,5 +38,3 @@ class ConexionDB:
             return None
         finally:
             cursor.close()
-
-
