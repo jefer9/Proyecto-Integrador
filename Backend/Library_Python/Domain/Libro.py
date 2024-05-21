@@ -59,10 +59,10 @@ class Libro:
     def crear_libro(self):
         print("Ingresar el libro")
         print("Ingresa los siguientes datos:")
+        self._id_libro = input("Ingresa Id Libro: ")
         self._titulo = input("Ingresa el título: ")
         self._autor = input("Ingresa el autor: ")
         self._editorial = input("Ingresa el editorial: ")
-        self._id_libro = input("Ingresa Id Libro: ")
         self._genero = input("Ingresa género: ")
         self._stock = input("Ingresa stock: ")
 
@@ -78,5 +78,16 @@ class Libro:
         finally:
             db.disconnect()
 
-libro1 = Libro()
-libro1.crear_libro()
+
+    # def __str__(self):
+    #     return f"""
+    #     Ingresa Id Libro: {self._id_libro},
+    #     Ingresa el título: {self._titulo},
+    #     Ingresa el autor: {self._autor}
+    #     Ingresa el editorial: {self._editorial},
+    #     Ingresa género: {self._genero},
+    #     Ingresa stock: {self._stock},
+    #     """
+
+# libro1 = Libro()
+# libro1.crear_libro()
