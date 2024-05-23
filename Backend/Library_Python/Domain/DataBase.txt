@@ -3,7 +3,8 @@ CREATE TABLE estudiantes(
     nombre_estudiante varchar (55),
     apellido_estudiante varchar (55),
     telefono_estudiante bigint,
-    email_estudiante varchar (55)
+    email_estudiante varchar (55),
+    contrasena_estudiante varchar (55)
 );
 
 CREATE TABLE docentes(
@@ -11,7 +12,8 @@ CREATE TABLE docentes(
     nombre_docente varchar (55),
     apellido_docente varchar (55),
     telefono_docente bigint,
-    email_docente varchar (55)
+    email_docente varchar (55),
+    contrasena_docente varchar (55)
 );
 
 CREATE TABLE pedidos(

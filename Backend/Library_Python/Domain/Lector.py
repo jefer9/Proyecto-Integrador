@@ -80,9 +80,9 @@ class Lector:
                     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
                     db.connect()
                     if opc == 1:
-                        query = "INSERT INTO estudiantes (id_estudiante, nombre_estudiante, apellido_estudiante, telefono_estudiante, email_estudiante, contraseña_estudiante) VALUES (%s, %s, %s, %s, %s, %s)"
+                        query = "INSERT INTO estudiantes (id_estudiante, nombre_estudiante, apellido_estudiante, telefono_estudiante, email_estudiante, contrasena_estudiante) VALUES (%s, %s, %s, %s, %s, %s)"
                     elif opc == 2:
-                        query = "INSERT INTO docentes (id_docente, nombre_docente, apellido_docente, telefono_docente, email_docente, contraseña_docente) VALUES (%s, %s, %s, %s, %s, %s)"
+                        query = "INSERT INTO docentes (id_docente, nombre_docente, apellido_docente, telefono_docente, email_docente, contrasena_docente) VALUES (%s, %s, %s, %s, %s, %s)"
                     values = (
                         self._id, self._nombre, self._apellido, self._telefono, self._correo, self._contrasena)
                     db.execute_query(query, values)
