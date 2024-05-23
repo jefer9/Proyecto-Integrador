@@ -1,5 +1,5 @@
 
-class pedido:
+class Pedido:
 
     def __init__(self, id_usuario, titulo_libro, codigo_libro, id_pedido, cantidad, fecha):
         self._id_usuario = id_usuario

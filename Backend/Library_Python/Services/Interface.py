@@ -13,8 +13,8 @@ class Interface:
             lector = Lector(None,None,None,None,None,None)
             lector.registro_usuario()
         elif opc == 2:
-            # lector.autenticacion_login()
-            pass
+            lector2 = Lector(None, None, None, None, None, None)
+            lector2.autenticar_login()
         elif opc == 3:
             print("\n\tGracias por visitarnos, hasta pronto!")
             break

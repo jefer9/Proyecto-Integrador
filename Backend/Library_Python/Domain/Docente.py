@@ -1,6 +1,6 @@
-from Backend.Library_Python.Domain import lector
+from Backend.Library_Python.Domain import Lector
 
-class docente(lector):
+class Docente(Lector):
 
     def __init__(self, nombre, direccion, telefono, id_docente):
         super.__init__(nombre, direccion, telefono)

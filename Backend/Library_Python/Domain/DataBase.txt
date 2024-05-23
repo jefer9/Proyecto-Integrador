@@ -1,3 +1,5 @@
+USE biblioteca;
+
 CREATE TABLE estudiantes(
     id_estudiante int PRIMARY KEY,
     nombre_estudiante varchar (55),
@@ -15,6 +17,17 @@ CREATE TABLE docentes(
     email_docente varchar (55),
     contrasena_docente varchar (55)
 );
+
+CREATE TABLE bibliotecario(
+	id_bibliotecario int PRIMARY KEY,
+    nombre_bibliotecario varchar (55),
+    apellido_bibliotecario varchar (55),
+    telefono_bibliotecario bigint,
+    email_bibliotecario varchar (55),
+    contrasena_bibliotecario varchar (55)
+);
+
+INSERT INTO bibliotecario(id_bibliotecario,nombre_bibliotecario,apellido_bibliotecario,telefono_bibliotecario,email_bibliotecario,contrasena_bibliotecario)VALUES (123,"B","B",1,"B","123")
 
 CREATE TABLE pedidos(
     id_pedido int PRIMARY KEY,

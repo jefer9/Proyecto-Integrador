@@ -1,4 +1,5 @@
 from Backend.Library_Python.Domain.ConexionBD import ConexionBD
+from Backend.Library_Python.Domain.Bibliotecario import Bibliotecario
 
 class Lector:
 
@@ -58,7 +59,6 @@ class Lector:
     def contrasena(self, contrasena):
         self._contrasena = contrasena
 
-    #metodos
     def registro_usuario(self):
         while True:
             print("\n\tFORMULARIO DE REGISTRO")
@@ -96,6 +96,53 @@ class Lector:
             else:
                 print("\n\tDebe completar todos los campos")
 
+    def autenticar_login(self):
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
+
+            while True:
+                try:
+                    usuario = int(input("Ingresa el numero de documento: "))
+                except ValueError:
+                    print("El número de documento debe ser un entero.")
+                    continue
+                contrasena = input("Ingresa la contraseña: ")
+
+                query = (
+                    "SELECT 'estudiante' AS tipo, id_estudiante AS id, contrasena_estudiante AS contrasena "
+                    "FROM estudiantes WHERE id_estudiante = %s AND contrasena_estudiante = %s "
+                    "UNION ALL "
+                    "SELECT 'docente' AS tipo, id_docente AS id, contrasena_docente AS contrasena "
+                    "FROM docentes WHERE id_docente = %s AND contrasena_docente = %s "
+                    "UNION ALL "
+                    "SELECT 'bibliotecario' AS tipo, id_bibliotecario AS id, contrasena_bibliotecario AS contrasena "
+                    "FROM bibliotecario WHERE id_bibliotecario = %s AND contrasena_bibliotecario = %s"
+                )
+
+                values = (usuario, contrasena, usuario, contrasena, usuario, contrasena)
+                result = db.execute_query(query, values)
+
+                if result:
+                    for row in result:
+                        tipo = row[0]
+                        id_usuario = row[1]
+                        contrasena_usuario = row[2]
+
+                        if tipo == 'bibliotecario' and id_usuario == 123 and contrasena_usuario == '123':
+                            bibliotecario = Bibliotecario(id_usuario, None, None, None, None, contrasena_usuario)
+                            bibliotecario.Crud()
+                            return True
+                        else:
+                            print("¡Bienvenido a la biblioteca!")
+                            return True
+                else:
+                    print("Usuario y/o contraseña incorrecta")
+
+        except Exception as e:
+            print("Error en la autenticación:", e)
+        finally:
+            db.disconnect()
 
     # -----------------------------------------------------------------------------
 
