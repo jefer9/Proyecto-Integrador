@@ -104,38 +104,39 @@ class Libro:
                     query_update_id = "UPDATE Libros SET id_libro = %s WHERE id_libro = %s"
                     values_update_id = (nuevo_id, id)
                     db.execute_query(query_update_id, values_update_id)
+                    id = nuevo_id
 
                 if nuevo_titulo:
-                    query_update_titulo = "UPDATE Libros SET titulo = %s WHERE titulo = %s"
+                    query_update_titulo = "UPDATE Libros SET titulo = %s WHERE id_libro = %s"
                     values_update_titulo = (nuevo_titulo, id)
                     db.execute_query(query_update_titulo, values_update_titulo)
 
                 if nuevo_autor:
-                    query_update_autor = "UPDATE Libros SET autor = %s WHERE autor = %s"
+                    query_update_autor = "UPDATE Libros SET autor = %s WHERE id_libro = %s"
                     values_update_autor = (nuevo_autor, id)
                     db.execute_query(query_update_autor, values_update_autor)
 
                 if nuevo_editorial:
-                    query_update_editorial = "UPDATE Libros SET editorial = %s WHERE editorial = %s"
+                    query_update_editorial = "UPDATE Libros SET editorial = %s WHERE id_libro = %s"
                     values_update_editorial = (nuevo_editorial, id)
                     db.execute_query(query_update_editorial, values_update_editorial)
 
                 if nuevo_genero:
-                    query_update_genero = "UPDATE Libros SET genero = %s WHERE genero = %s"
+                    query_update_genero = "UPDATE Libros SET genero = %s WHERE id_libro = %s"
                     values_update_genero = (nuevo_genero, id)
                     db.execute_query(query_update_genero, values_update_genero)
 
                 if nuevo_stock:
-                    query_update_stock = "UPDATE Libros SET stock = %s WHERE stock = %s"
+                    query_update_stock = "UPDATE Libros SET stock = %s WHERE id_libro = %s"
                     values_update_stock = (nuevo_stock, id)
                     db.execute_query(query_update_stock, values_update_stock)
 
                 print("\n\tLibro actualizado exitosamente")
             else:
-                print("ID no encontrado")
+                print("\n\tID no encontrado")
 
         except Exception as e:
-            print("Error al modificar la persona:", e)
+            print("\n\tError al modificar la persona:", e)
 
         finally:
             db.disconnect()
@@ -145,26 +146,26 @@ class Libro:
             db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
             db.connect()
 
-            id = input("Ingresa el ID del libro que deseas buscar: ")
+            id = input("\nIngresa el ID del libro que deseas buscar: ")
 
             query = "SELECT * FROM Libros WHERE id_libro = %s"
             values = (id,)
             result = db.execute_query(query, values)
 
             if result:
-                print("Libro  encontrado:")
+                print("\n\tLibro  encontrado exitosamente!")
                 for row in result:
-                    print(f" Id: {row[0]}\n"
-                          f" Nombre: {row[1]}\n"
-                          f" Autor: {row[2]}\n"
-                          f" Editorial: {row[3]}\n"
-                          f" Genero: {row[4]}\n"
-                          f" Stock: {row[5]}")  # Imprime cada fila de datos
+                    print(f"Id: {row[0]}\n"
+                          f"Nombre: {row[1]}\n"
+                          f"Autor: {row[2]}\n"
+                          f"Editorial: {row[3]}\n"
+                          f"Genero: {row[4]}\n"
+                          f"Stock: {row[5]}")  # Imprime cada fila de datos
             else:
-                print("Libro no encontrado")
+                print("\n\tLibro no encontrado")
 
         except Exception as e:
-            print("Error al buscar el libro:", e)
+            print("\n\tError al buscar el libro:", e)
         finally:
             db.disconnect()
 
