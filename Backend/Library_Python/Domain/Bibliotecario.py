@@ -1,4 +1,4 @@
-
+from Backend.Library_Python.Domain.Libro import Libro
 class Bibliotecario:
 
     def __init__(self, id, nombre, apellido, telefono, email, contrasena):
@@ -58,14 +58,31 @@ class Bibliotecario:
         self._contrasena = contrasena
 
     def Crud(self):
-        int(input("\nBienvenido administrador\n"
-                    "\n\t---------------\n"
+        opc = int(input("\nBienvenido administrador\n"
+                    "\n\tElige una opcion\n"
                     "1. Crear\n"
                     "2. Editar\n"
-                    "3. Actualizar\n"
+                    "3. Buscar\n"
                     "4. Eliminar\n"
                     "5. Salir. "))
-        opc = int(input("Elige una opción: "))
+
+
+        if opc == 1:
+            libro = Libro(None,None,None,None,None,None)
+            libro.crear_libro()
+
+        if opc == 2:
+            libro2 = Libro(None, None, None, None, None, None)
+            libro2.editar_libro()
+
+        if opc == 3:
+            libro3 = Libro(None, None, None, None, None, None)
+            libro3.buscar_libro()
+
+
+
+
+
 
 
 

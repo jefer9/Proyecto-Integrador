@@ -1,4 +1,4 @@
-from ConexionBD import ConexionBD
+from Backend.Library_Python.Domain.ConexionBD import ConexionBD
 class Libro:
     def __init__(self,  id_libro=None, titulo=None, autor=None, editorial=None, genero=None, stock=None):
         self._id_libro = id_libro
@@ -57,7 +57,7 @@ class Libro:
         self._stock = stock
 
     def crear_libro(self):
-        print("Ingresar el libro")
+        print("\n\tIngresar el libro\n")
         print("Ingresa los siguientes datos:")
         self._id_libro = input("Ingresa Id Libro: ")
         self._titulo = input("Ingresa el título: ")
@@ -78,16 +78,94 @@ class Libro:
         finally:
             db.disconnect()
 
+    def editar_libro(self):
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
 
-    # def __str__(self):
-    #     return f"""
-    #     Ingresa Id Libro: {self._id_libro},
-    #     Ingresa el título: {self._titulo},
-    #     Ingresa el autor: {self._autor}
-    #     Ingresa el editorial: {self._editorial},
-    #     Ingresa género: {self._genero},
-    #     Ingresa stock: {self._stock},
-    #     """
+            id = input("\nIngresa el ID del Libro que deseas modificar: ")
 
-# libro1 = Libro()
-# libro1.crear_libro()
+            query_select = "SELECT * FROM Libros WHERE id_libro = %s"
+            values_select = (id,)
+            result_select = db.execute_query(query_select, values_select)
+
+            if result_select:
+                print("\nIngresa los nuevos datos:")
+
+                nuevo_id = input("Nuevo id: ")
+                nuevo_titulo = input("Nuevo titulo: ")
+                nuevo_autor = input("Nuevo autor: ")
+                nuevo_editorial = input("Nuevo editorial: ")
+                nuevo_genero = input("Nuevo genero: ")
+                nuevo_stock = input("Nuevo stock: ")
+
+                # Verifica si los datos no están vacíos antes de actualizarlos
+                if nuevo_id:
+                    query_update_id = "UPDATE Libros SET id_libro = %s WHERE id_libro = %s"
+                    values_update_id = (nuevo_id, id)
+                    db.execute_query(query_update_id, values_update_id)
+
+                if nuevo_titulo:
+                    query_update_titulo = "UPDATE Libros SET titulo = %s WHERE titulo = %s"
+                    values_update_titulo = (nuevo_titulo, id)
+                    db.execute_query(query_update_titulo, values_update_titulo)
+
+                if nuevo_autor:
+                    query_update_autor = "UPDATE Libros SET autor = %s WHERE autor = %s"
+                    values_update_autor = (nuevo_autor, id)
+                    db.execute_query(query_update_autor, values_update_autor)
+
+                if nuevo_editorial:
+                    query_update_editorial = "UPDATE Libros SET editorial = %s WHERE editorial = %s"
+                    values_update_editorial = (nuevo_editorial, id)
+                    db.execute_query(query_update_editorial, values_update_editorial)
+
+                if nuevo_genero:
+                    query_update_genero = "UPDATE Libros SET genero = %s WHERE genero = %s"
+                    values_update_genero = (nuevo_genero, id)
+                    db.execute_query(query_update_genero, values_update_genero)
+
+                if nuevo_stock:
+                    query_update_stock = "UPDATE Libros SET stock = %s WHERE stock = %s"
+                    values_update_stock = (nuevo_stock, id)
+                    db.execute_query(query_update_stock, values_update_stock)
+
+                print("\n\tLibro actualizado exitosamente")
+            else:
+                print("ID no encontrado")
+
+        except Exception as e:
+            print("Error al modificar la persona:", e)
+
+        finally:
+            db.disconnect()
+
+    def buscar_libro(self):
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
+
+            id = input("Ingresa el ID del libro que deseas buscar: ")
+
+            query = "SELECT * FROM Libros WHERE id_libro = %s"
+            values = (id,)
+            result = db.execute_query(query, values)
+
+            if result:
+                print("Libro  encontrado:")
+                for row in result:
+                    print(f" Id: {row[0]}\n"
+                          f" Nombre: {row[1]}\n"
+                          f" Autor: {row[2]}\n"
+                          f" Editorial: {row[3]}\n"
+                          f" Genero: {row[4]}\n"
+                          f" Stock: {row[5]}")  # Imprime cada fila de datos
+            else:
+                print("Libro no encontrado")
+
+        except Exception as e:
+            print("Error al buscar el libro:", e)
+        finally:
+            db.disconnect()
+
+

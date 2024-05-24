@@ -103,7 +103,7 @@ class Lector:
 
             while True:
                 try:
-                    usuario = int(input("Ingresa el numero de documento: "))
+                    usuario = int(input("\nIngresa el numero de documento: "))
                 except ValueError:
                     print("El número de documento debe ser un entero.")
                     continue
