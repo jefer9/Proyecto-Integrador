@@ -1,7 +1,7 @@
 function Nav() {
   return (
     <>
-      <nav className=" mx-auto flex justify-evenly w-2/4">
+      <nav className=" mx-auto flex justify-evenly w-2/4 font-roboto">
         <a href="">INICIO</a>
         <a href="">GALERÍA</a>
         <a href="">CONTACTO</a>

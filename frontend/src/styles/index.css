@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: "Roboto";
+    src: url(../../fonts/Roboto/Roboto-Black.ttf)
+    format("ttf"),
+    url(../../fonts/Roboto/Roboto-BlackItalic.ttf)
+    format("ttf"),
+    url(../../fonts/Roboto/Roboto-Bold.ttf),
+    format("ttf")
+}
+
+:root{
+    --primary-color: rgb(49, 46, 97);
+    --secondary-color: rgb(73, 68, 150);
+    --color-parrafo: rgb(234, 233, 245);
+}
