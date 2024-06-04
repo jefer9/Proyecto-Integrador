@@ -169,4 +169,37 @@ class Libro:
         finally:
             db.disconnect()
 
+    # -------------------------------------------------------------------------------------------------
+    def eliminar_libro(self):
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
+
+            while True:
+
+                id = input("Ingresa el ID del libro que desea eliminar que deseas eliminar: ")
+
+                query = "SELECT * FROM Libros WHERE id_libro = %s"
+                values = (id,)
+                result = db.execute_query(query, values)
+
+                if result:
+                    confirmacion = input("¿Estás seguro de que deseas eliminar el libro? (S/N): ")
+                    if confirmacion.upper() == "S":
+                        query = "DELETE FROM Libros WHERE id_libro = %s"
+                        values = (id,)
+                        db.execute_query(query, values)
+                        print("Libro eliminado exitosamente")
+                        return True
+
+                    else:
+                        print("Operación cancelada")
+                else:
+                    print("ID no encontrado")
+
+        except Exception as e:
+            print("Error al eliminar el libro:", e)
+        finally:
+            db.disconnect()
+
 

@@ -79,6 +79,16 @@ class Bibliotecario:
             libro3 = Libro(None, None, None, None, None, None)
             libro3.buscar_libro()
 
+        if opc == 4:
+            libro4 = Libro(None, None, None, None, None, None)
+            libro4.eliminar_libro()
+
+        # if opc == 5:
+        #     print("\n\tGracias por visitarnos, hasta pronto!")
+        #     break
+        # else:
+        #     print("Ingresa una opcion valida")
+
 
 
 
