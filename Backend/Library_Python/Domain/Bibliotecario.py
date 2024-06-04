@@ -78,6 +78,9 @@ class Bibliotecario:
         if opc == 3:
             libro3 = Libro(None, None, None, None, None, None)
             libro3.buscar_libro()
+        if opc == 4:
+            libro4 = Libro(None, None, None, None, None, None)
+            libro4.eliminar_libro()
 
 
 
