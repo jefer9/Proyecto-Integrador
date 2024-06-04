@@ -58,47 +58,32 @@ class Bibliotecario:
         self._contrasena = contrasena
 
     def Crud(self):
-        opc = int(input("\nBienvenido administrador\n"
-                    "\n\tElige una opcion\n"
-                    "1. Crear\n"
-                    "2. Editar\n"
-                    "3. Buscar\n"
-                    "4. Eliminar\n"
-                    "5. Salir. "))
 
+        while True:
+            opc = int(input("\nBienvenido administrador\n"
+                        "\n\tElige una opcion\n"
+                        "1. Crear\n"
+                        "2. Editar\n"
+                        "3. Buscar\n"
+                        "4. Eliminar\n"
+                        "5. Salir. "))
+            if opc > 1 or opc < 6:
 
-        if opc == 1:
-            libro = Libro(None,None,None,None,None,None)
-            libro.crear_libro()
-
-        if opc == 2:
-            libro2 = Libro(None, None, None, None, None, None)
-            libro2.editar_libro()
-
-        if opc == 3:
-            libro3 = Libro(None, None, None, None, None, None)
-            libro3.buscar_libro()
-        if opc == 4:
-            libro4 = Libro(None, None, None, None, None, None)
-            libro4.eliminar_libro()
-
-        if opc == 4:
-            libro4 = Libro(None, None, None, None, None, None)
-            libro4.eliminar_libro()
-
-        # if opc == 5:
-        #     print("\n\tGracias por visitarnos, hasta pronto!")
-        #     break
-        # else:
-        #     print("Ingresa una opcion valida")
-
-
-
-
-
-
-
-
-
-
-
+                if opc == 1:
+                    libro = Libro(None,None,None,None,None,None)
+                    libro.crear_libro()
+                if opc == 2:
+                    libro2 = Libro(None, None, None, None, None, None)
+                    libro2.editar_libro()
+                if opc == 3:
+                    libro3 = Libro(None, None, None, None, None, None)
+                    libro3.buscar_libro()
+                if opc == 4:
+                    libro4 = Libro(None, None, None, None, None, None)
+                    libro4.eliminar_libro()
+                if opc == 5:
+                    print("\n\tGracias por visitarnos, hasta pronto!")
+                    break
+            else:
+                print("Ingresa una opcion valida")
+                return True
