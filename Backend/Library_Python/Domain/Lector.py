@@ -165,16 +165,6 @@ class Lector:
             if result:
                 print("\n\t\tLibros disponibles\n")
                 for row in result:
-                    # print(f"ID: {row[0]}")
-                    # print(f"Titulo: {row[0]}")
-                    # print(f"Autor: {row[0]}")
-                    # print(f"Editorial: {row[0]}")
-                    # print(f"Genero: {row[0]}")
-                    # print(f"Cantidad disponible: {row[0]}")
-                    # print("\t")
-
-                    #****** MODIFIQUE LA FORMA DE IMPRIMIRLO PARA QUE SEA MAS FACIL VISUALIZAR VARIOS LIBROS ******
-
                     print(f"ID: {row[0]} Titulo: {row[1]} Autor: {row[2]} Editorial: {row[3]} Genero: {row[4]} Cantidad disponible: {row[5]}")
                     print("\t")
         except Exception as e:
@@ -192,12 +182,15 @@ class Lector:
             db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
             db.connect()
 
+            cantidad_final = 0
+
             self._id_usuario = input("Usuario: ")
             self._id_libro = input("Id Libro: ")
             self._titulo = input("Título: ")
-            self._cantidad = 1
+            self._cantidad = input("Ingresa la cantidad libros: ")
+            self._cantidad = cantidad_final+ self._cantidad
             self._fecha = datetime.date.today().strftime('%Y-%m-%d')  # Fecha actual
-
+            print(cantidad_final)
             # Verificar si el libro tiene suficiente stock
             query_check_stock = "SELECT stock FROM libros WHERE id_libro = %s"
             values_check_stock = (self._id_libro,)

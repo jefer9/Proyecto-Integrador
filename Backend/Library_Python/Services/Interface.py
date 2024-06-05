@@ -16,7 +16,6 @@ class Interface:
         elif opc == 2:
             lector2 = Lector(None, None, None, None, None, None)
             tipo_usuario = lector2.autenticar_login()
-
         elif opc == 3:
             print("\n\tGracias por visitarnos, hasta pronto!")
             break

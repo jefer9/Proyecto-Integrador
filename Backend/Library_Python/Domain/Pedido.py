@@ -1,4 +1,4 @@
-
+from Backend.Library_Python.Domain.ConexionBD import ConexionBD
 class Pedido:
 
     def __init__(self, id_pedido, id_usuario, id_libro, titulo, cantidad, fecha):
@@ -56,6 +56,29 @@ class Pedido:
     @fecha.setter
     def fecha(self, fecha):
         self._fecha = fecha
+
+    def visualizar_pedidos(self):
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
+
+            print("Pedidos pendientes por entregar")
+
+            query = "SELECT * FROM pedidos"
+
+            result = db.execute_query(query)
+
+            if result:
+                print("\n\t\tPedidos pendientes\n")
+                for row in result:
+                    print(f"ID pedido: {row[0]} ID usuario: {row[1]} ID libro: {row[2]} Titulo libro: {row[3]} Cantidad: {row[4]} Fecha pedido: {row[5]} ")
+        except Exception as e:
+            print("Error al encontrar los pedidos", e)
+        finally:
+            db.disconnect()
+
+
+
 
 
 

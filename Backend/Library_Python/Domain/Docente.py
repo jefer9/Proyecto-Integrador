@@ -27,7 +27,9 @@ class Docente(Lector):
                 lector = Lector(None, None, None, None, None, None)
                 lector.visualizar_libros()
             elif opc == 2:
-                print("Rerservar libros")
+                docente = Docente(None,None,None,None,None,None)
+                docente.reservar_libro()
+
             elif opc == 3:
                 break
             else:
