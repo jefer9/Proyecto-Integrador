@@ -189,17 +189,15 @@ class Libro:
                         values = (id,)
                         db.execute_query(query, values)
                         print("Libro eliminado exitosamente")
-                        break
+                        return True
                     else:
                         print("Operación cancelada")
-                        break
                 else:
                     print("ID no encontrado")
-                    continue
 
         except Exception as e:
-                print("Error al eliminar el libro:", e)
+            print("Error al eliminar el libro:", e)
         finally:
-                db.disconnect()
+           db.disconnect()
 
 
