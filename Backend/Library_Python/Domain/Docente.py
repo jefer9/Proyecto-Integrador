@@ -18,11 +18,11 @@ class Docente(Lector):
 
     def menu_docente(self):
         while True:
-            opc = int(input("\nBienvenido docente\n"
-                            "\n\tElige una opcion \n"
+            opc = int(input("\n\tBienvenido docente\n"
+                            "\nElige una opcion\n"
                             "1. Visualizar libros\n"
                             "2. reservar libros\n"
-                            "3. Salir\n"))
+                            "3. Salir: "))
             if opc == 1:
                 lector = Lector(None, None, None, None, None, None)
                 lector.visualizar_libros()

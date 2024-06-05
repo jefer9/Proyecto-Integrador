@@ -67,15 +67,12 @@ class Bibliotecario:
                             "3. Buscar\n"
                             "4. Eliminar\n"
                             "5. Salir. "))
-
             if opc == 1:
                 libro = Libro(None, None, None, None, None, None)
                 libro.crear_libro()
-
             if opc == 2:
                 libro2 = Libro(None, None, None, None, None, None)
                 libro2.editar_libro()
-
             if opc == 3:
                 libro3 = Libro(None, None, None, None, None, None)
                 libro3.buscar_libro()
@@ -83,8 +80,10 @@ class Bibliotecario:
                 libro4 = Libro(None, None, None, None, None, None)
                 libro4.eliminar_libro()
             if opc == 5:
-                print("\n\tGracias por visitarnos\n")
+                print("\n\tGracias por visitarnos, hasta pronto!")
                 break
+            else:
+                print("\n\tIngresa una opcion valida")
 
 
 

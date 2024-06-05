@@ -1,13 +1,21 @@
 
 class Pedido:
 
-    def __init__(self, id_usuario, titulo_libro, codigo_libro, id_pedido, cantidad, fecha):
-        self._id_usuario = id_usuario
-        self._titulo_libro = titulo_libro
-        self._codigo_libro = codigo_libro
+    def __init__(self, id_pedido, id_usuario, id_libro, titulo, cantidad, fecha):
         self._id_pedido = id_pedido
+        self._id_usuario = id_usuario
+        self._id_libro = id_libro # Modificar en la base de datos
+        self._titulo = titulo
         self._cantidad = cantidad
         self._fecha = fecha
+
+    @property
+    def id_pedido(self):
+        return self._id_pedido
+
+    @id_pedido.setter
+    def id_pedido(self, id_pedido):
+        self._id_pedido = id_pedido
 
     @property
     def id_usuario(self):
@@ -18,28 +26,20 @@ class Pedido:
         self._id_usuario = id_usuario
 
     @property
-    def titulo_libro(self):
-        return self._titulo_libro
+    def id_libro(self):
+        return self._id_libro
 
-    @titulo_libro.setter
-    def titulo_libro(self, titulo_libro):
-        self._titulo_libro = titulo_libro
-
-    @property
-    def codigo_libro(self):
-        return self._codigo_libro
-
-    @codigo_libro.setter
-    def codigo_libro(self, codigo_libro):
-        self._codigo_libro = codigo_libro
+    @id_libro.setter
+    def id_libro(self, id_libro):
+        self._id_libro = id_libro
 
     @property
-    def id_pedido(self):
-        return self._id_pedido
+    def titulo(self):
+        return self._titulo
 
-    @id_pedido.setter
-    def id_pedido(self, id_pedido):
-        self._id_pedido = id_pedido
+    @titulo.setter
+    def titulo(self, titulo):
+        self._titulo = titulo
 
     @property
     def cantidad(self):

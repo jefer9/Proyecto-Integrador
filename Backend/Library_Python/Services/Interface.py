@@ -21,6 +21,4 @@ class Interface:
             print("\n\tGracias por visitarnos, hasta pronto!")
             break
         else:
-            print("Ingresa una opcion valida")
-
-#------
+            print("\n\tIngresa una opcion valida")

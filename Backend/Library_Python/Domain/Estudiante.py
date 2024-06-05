@@ -18,16 +18,17 @@ class Estudiante(Lector):
 
     def menu_estudiante(self):
         while True:
-            opc = int(input("\nBienvenido estudiante\n"
-                            "\n\tElige una opcion\n"
+            opc = int(input("\n\tBienvenido estudiante\n"
+                            "\nElige una opcion\n"
                             "1. Visualizar libros\n"
                             "2. reservar libros\n"
-                            "3. Salir\n"))
+                            "3. Salir: "))
             if opc == 1:
                 lector = Lector(None,None,None,None,None,None)
                 lector.visualizar_libros()
             elif opc == 2:
-                print("Reservar los libros")
+                estudiante = Lector(None,None,None,None,None,None)
+                estudiante.reservar_libro()
             elif opc == 3:
                 break
             else:
