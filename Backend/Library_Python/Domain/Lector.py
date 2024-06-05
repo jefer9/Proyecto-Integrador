@@ -9,7 +9,7 @@ class Lector:
         self._apellido = apellido
         self._telefono = telefono
         self._email = email
-        self.contrasena = contrasena
+        self._contrasena = contrasena
 
     @property
     def id(self):
@@ -132,10 +132,18 @@ class Lector:
                         if tipo == 'bibliotecario' and id_usuario == 123 and contrasena_usuario == '123':
                             bibliotecario = Bibliotecario(id_usuario, None, None, None, None, contrasena_usuario)
                             bibliotecario.Crud()
-                            return True
-                        else:
-                            print("¡Bienvenido a la biblioteca!")
-                            return True
+                            return 'bibliotecario'
+                        elif tipo == 'docente' and id_usuario == usuario and contrasena_usuario == contrasena:
+                            from Backend.Library_Python.Domain.Docente import Docente
+                            docente = Docente(None,None,None,None,None,None)
+                            docente.menu_docente()
+                            return 'docente'
+                        elif tipo == 'estudiante' and id_usuario == usuario and contrasena_usuario == contrasena:
+                            from Backend.Library_Python.Domain.Estudiante import Estudiante
+                            estudiante = Estudiante(usuario, None, None, None, None, contrasena)
+                            estudiante.menu_estudiante()
+                            return 'estudiante'
+                    print("¡Bienvenido a la biblioteca!")
                 else:
                     print("Usuario y/o contraseña incorrecta")
 
@@ -143,6 +151,33 @@ class Lector:
             print("Error en la autenticación:", e)
         finally:
             db.disconnect()
+
+    def visualizar_libros(self):
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
+
+            query = "SELECT * FROM Libros"
+
+            result = db.execute_query(query)
+
+            if result:
+                print("Libros disponibles")
+                for row in result:
+                    print(f"ID: {row[0]}")
+                    print(f"Titulo: {row[0]}")
+                    print(f"Autor: {row[0]}")
+                    print(f"Editorial: {row[0]}")
+                    print(f"Genero: {row[0]}")
+                    print(f"Cantidad disponible: {row[0]}")
+                    print("\t")
+        except Exception as e:
+            print("error al encontrar los libros", e)
+
+        finally:
+            db.disconnect()
+
+
 
     # -----------------------------------------------------------------------------
 
