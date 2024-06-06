@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Docente.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Docente.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Estudiante.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Estudiante.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Lector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Lector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Pedido.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Pedido.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
