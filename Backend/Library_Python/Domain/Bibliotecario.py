@@ -1,4 +1,5 @@
 from Backend.Library_Python.Domain.Libro import Libro
+from Backend.Library_Python.Domain.Pedido import Pedido
 class Bibliotecario:
 
     def __init__(self, id, nombre, apellido, telefono, email, contrasena):
@@ -58,26 +59,38 @@ class Bibliotecario:
         self._contrasena = contrasena
 
     def Crud(self):
-        opc = int(input("\nBienvenido administrador\n"
-                    "\n\tElige una opcion\n"
-                    "1. Crear\n"
-                    "2. Editar\n"
-                    "3. Buscar\n"
-                    "4. Eliminar\n"
-                    "5. Salir. "))
+
+        while True:
+            opc = int(input("\nBienvenido administrador\n"
+                            "\n\tElige una opcion\n"
+                            "1. Crear\n"
+                            "2. Editar\n"
+                            "3. Buscar\n"
+                            "4. Visualizar pedidos\n"
+                            "5. Eliminar\n"
+                            "6. Salir. "))
+            if opc == 1:
+                libro = Libro(None, None, None, None, None, None)
+                libro.crear_libro()
+            elif opc == 2:
+                libro2 = Libro(None, None, None, None, None, None)
+                libro2.editar_libro()
+            elif opc == 3:
+                libro3 = Libro(None, None, None, None, None, None)
+                libro3.buscar_libro()
+            elif opc == 4:
+                pedido = Pedido(None,None,None,None,None,None)
+                pedido.visualizar_pedidos()
+            elif opc == 5:
+                libro4 = Libro(None, None, None, None, None, None)
+                libro4.eliminar_libro()
+            elif opc == 6:
+                print("\n\tGracias por visitarnos, hasta pronto!")
+                break
+            else:
+                print("\n\tIngresa una opcion valida")
 
 
-        if opc == 1:
-            libro = Libro(None,None,None,None,None,None)
-            libro.crear_libro()
-
-        if opc == 2:
-            libro2 = Libro(None, None, None, None, None, None)
-            libro2.editar_libro()
-
-        if opc == 3:
-            libro3 = Libro(None, None, None, None, None, None)
-            libro3.buscar_libro()
 
 
 

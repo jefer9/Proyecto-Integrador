@@ -1,5 +1,6 @@
 from Backend.Library_Python.Domain.ConexionBD import ConexionBD
 from Backend.Library_Python.Domain.Bibliotecario import Bibliotecario
+import datetime
 
 class Lector:
 
@@ -9,7 +10,7 @@ class Lector:
         self._apellido = apellido
         self._telefono = telefono
         self._email = email
-        self.contrasena = contrasena
+        self._contrasena = contrasena
 
     @property
     def id(self):
@@ -132,10 +133,18 @@ class Lector:
                         if tipo == 'bibliotecario' and id_usuario == 123 and contrasena_usuario == '123':
                             bibliotecario = Bibliotecario(id_usuario, None, None, None, None, contrasena_usuario)
                             bibliotecario.Crud()
-                            return True
-                        else:
-                            print("¡Bienvenido a la biblioteca!")
-                            return True
+                            return 'bibliotecario'
+                        elif tipo == 'docente' and id_usuario == usuario and contrasena_usuario == contrasena:
+                            from Backend.Library_Python.Domain.Docente import Docente
+                            docente = Docente(None,None,None,None,None,None)
+                            docente.menu_docente()
+                            return 'docente'
+                        elif tipo == 'estudiante' and id_usuario == usuario and contrasena_usuario == contrasena:
+                            from Backend.Library_Python.Domain.Estudiante import Estudiante
+                            estudiante = Estudiante(usuario, None, None, None, None, contrasena)
+                            estudiante.menu_estudiante()
+                            return 'estudiante'
+                    print("¡Bienvenido a la biblioteca!")
                 else:
                     print("Usuario y/o contraseña incorrecta")
 
@@ -144,10 +153,76 @@ class Lector:
         finally:
             db.disconnect()
 
-    # -----------------------------------------------------------------------------
+    def visualizar_libros(self):
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
 
-    # def reservar(self):
-    #     print("pedido reservado exitosamente")
-    #
+            query = "SELECT * FROM Libros"
+
+            result = db.execute_query(query)
+
+            if result:
+                print("\n\t\tLibros disponibles\n")
+                for row in result:
+                    print(f"ID: {row[0]} Titulo: {row[1]} Autor: {row[2]} Editorial: {row[3]} Genero: {row[4]} Cantidad disponible: {row[5]}")
+                    print("\t")
+        except Exception as e:
+            print("\nerror al encontrar los libros", e)
+
+        finally:
+            db.disconnect()
+
+    # ---------------------------------------------------------------------------------
+
+    def reservar_libro(self):
+        print("\n\tIngresar los datos del libro que deseas reservar\n")
+
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
+
+            cantidad_final = 0
+
+            self._id_usuario = input("Usuario: ")
+            self._id_libro = input("Id Libro: ")
+            self._titulo = input("Título: ")
+            self._cantidad = input("Ingresa la cantidad libros: ")
+            self._cantidad = cantidad_final+ self._cantidad
+            self._fecha = datetime.date.today().strftime('%Y-%m-%d')  # Fecha actual
+            print(cantidad_final)
+            # Verificar si el libro tiene suficiente stock
+            query_check_stock = "SELECT stock FROM libros WHERE id_libro = %s"
+            values_check_stock = (self._id_libro,)
+            result = db.execute_query(query_check_stock, values_check_stock)
+
+            if not result or result[0][0] < self._cantidad:
+                print("No hay suficiente stock para este libro.")
+                return
+
+            # Insertar el pedido en la tabla pedidos
+            query_insert_pedido = "INSERT INTO pedidos (id_usuario, id_libro, titulo_libro, cantidad, fecha) VALUES (%s, %s, %s, %s, %s)"
+            values_insert_pedido = (self._id_usuario, self._id_libro, self._titulo, self._cantidad, self._fecha)
+            db.execute_query(query_insert_pedido, values_insert_pedido)
+
+            # Restar la cantidad del stock en la tabla libros
+            query_update_stock = "UPDATE libros SET stock = stock - %s WHERE id_libro = %s"
+            values_update_stock = (self._cantidad, self._id_libro)
+            db.execute_query(query_update_stock, values_update_stock)
+
+            db.connection.commit()  # Confirmar la transacción
+            print("\n\tpedido reservado exitosamente")
+
+        except Exception as e:
+            print("\nError al reservar el libro:", e)
+        finally:
+            db.disconnect()
+
+
+
+
+
+
+    # ----------------------------------------------------------------------------------
     # def entregar(self):
     #     print("pedido entregado exitosamente")

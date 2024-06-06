@@ -27,12 +27,15 @@ CREATE TABLE bibliotecario(
     contrasena_bibliotecario varchar (55)
 );
 
-INSERT INTO bibliotecario(id_bibliotecario,nombre_bibliotecario,apellido_bibliotecario,telefono_bibliotecario,email_bibliotecario,contrasena_bibliotecario)VALUES (123,"B","B",1,"B","123")
+INSERT INTO bibliotecario(id_bibliotecario,nombre_bibliotecario,apellido_bibliotecario,telefono_bibliotecario,email_bibliotecario,contrasena_bibliotecario)VALUES (123,"B","B",1,"B","123");
 
 CREATE TABLE pedidos(
-    id_pedido int PRIMARY KEY,
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario int ,
+    id_libro int ,
     titulo_libro varchar(55),
-    cantidad int
+    cantidad int,
+   	fecha DATE
 );
 
 CREATE TABLE Libros(

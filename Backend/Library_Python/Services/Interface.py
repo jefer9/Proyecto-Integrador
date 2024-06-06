@@ -1,5 +1,6 @@
 from Backend.Library_Python.Domain.Lector import Lector
 
+
 class Interface:
 
     while True:
@@ -14,9 +15,9 @@ class Interface:
             lector.registro_usuario()
         elif opc == 2:
             lector2 = Lector(None, None, None, None, None, None)
-            lector2.autenticar_login()
+            tipo_usuario = lector2.autenticar_login()
         elif opc == 3:
             print("\n\tGracias por visitarnos, hasta pronto!")
             break
         else:
-            print("Ingresa una opcion valida")
+            print("\n\tIngresa una opcion valida")
