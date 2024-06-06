@@ -19,6 +19,7 @@ class Estudiante(Lector):
     def menu_estudiante(self):
         while True:
             opc = int(input("\n\tBienvenido estudiante\n"
+                            "\nRecuerda que puedes reservar hasta 3 libros\n"
                             "\nElige una opcion\n"
                             "1. Visualizar libros\n"
                             "2. reservar libros\n"
@@ -29,6 +30,7 @@ class Estudiante(Lector):
             elif opc == 2:
                 estudiante = Lector(None,None,None,None,None,None)
                 estudiante.reservar_libro()
+
             elif opc == 3:
                 break
             else:
@@ -37,4 +39,3 @@ class Estudiante(Lector):
 
 
 
-#--------

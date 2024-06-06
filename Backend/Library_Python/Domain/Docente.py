@@ -19,6 +19,7 @@ class Docente(Lector):
     def menu_docente(self):
         while True:
             opc = int(input("\n\tBienvenido docente\n"
+                            "\nRecuerda que puedes reservar hasta 30 libros\n"
                             "\nElige una opcion\n"
                             "1. Visualizar libros\n"
                             "2. reservar libros\n"
