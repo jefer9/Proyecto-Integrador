@@ -4,7 +4,7 @@ class Pedido:
     def __init__(self, id_pedido, id_usuario, id_libro, titulo, cantidad, fecha):
         self._id_pedido = id_pedido
         self._id_usuario = id_usuario
-        self._id_libro = id_libro # Modificar en la base de datos
+        self._id_libro = id_libro
         self._titulo = titulo
         self._cantidad = cantidad
         self._fecha = fecha

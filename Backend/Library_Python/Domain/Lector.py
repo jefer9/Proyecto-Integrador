@@ -182,15 +182,38 @@ class Lector:
             db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
             db.connect()
 
-            cantidad_final = 0
-
             self._id_usuario = input("Usuario: ")
             self._id_libro = input("Id Libro: ")
             self._titulo = input("Título: ")
-            self._cantidad = input("Ingresa la cantidad libros: ")
-            self._cantidad = cantidad_final+ self._cantidad
+            self._cantidad = int(input("Cantidad: "))
             self._fecha = datetime.date.today().strftime('%Y-%m-%d')  # Fecha actual
-            print(cantidad_final)
+
+            # Determinar el tipo de usuario
+            query_tipo_usuario = (
+                "SELECT 'estudiante' AS tipo FROM estudiantes WHERE id_estudiante = %s "
+                "UNION ALL "
+                "SELECT 'docente' AS tipo FROM docentes WHERE id_docente = %s"
+            )
+            values_tipo_usuario = (self._id_usuario, self._id_usuario)
+            result_tipo_usuario = db.execute_query(query_tipo_usuario, values_tipo_usuario)
+
+            if not result_tipo_usuario:
+                print("Usuario no encontrado.")
+                return
+
+            tipo_usuario = result_tipo_usuario[0][0]
+
+            # Verificar la cantidad total de libros reservados por el usuario
+            query_libros_reservados = "SELECT SUM(cantidad) FROM pedidos WHERE id_usuario = %s"
+            values_libros_reservados = (self._id_usuario,)
+            result_libros_reservados = db.execute_query(query_libros_reservados, values_libros_reservados)
+
+            libros_reservados = result_libros_reservados[0][0] or 0
+
+            if (tipo_usuario == 'estudiante' and libros_reservados + self._cantidad > 3) or (tipo_usuario == 'docente' and libros_reservados + self._cantidad > 30):
+                print(f"El {tipo_usuario} no puede reservar más de {3 if tipo_usuario == 'estudiante' else 30} libros.")
+                return
+
             # Verificar si el libro tiene suficiente stock
             query_check_stock = "SELECT stock FROM libros WHERE id_libro = %s"
             values_check_stock = (self._id_libro,)
@@ -211,18 +234,81 @@ class Lector:
             db.execute_query(query_update_stock, values_update_stock)
 
             db.connection.commit()  # Confirmar la transacción
-            print("\n\tpedido reservado exitosamente")
+            print("\n\tPedido reservado exitosamente")
 
         except Exception as e:
             print("\nError al reservar el libro:", e)
         finally:
             db.disconnect()
 
-
-
-
-
-
     # ----------------------------------------------------------------------------------
-    # def entregar(self):
-    #     print("pedido entregado exitosamente")
+    def entregar_libro(self):
+        print("\n\tIngresa los datos del libro que deseas entregar\n")
+
+        try:
+            db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+            db.connect()
+
+            self._id_usuario = input("Usuario: ")
+            self._id_libro = input("Id Libro: ")
+            self._cantidad = int(input("Cantidad: "))
+
+            # Determinar el tipo de usuario
+            query_tipo_usuario = (
+                "SELECT 'estudiante' AS tipo FROM estudiantes WHERE id_estudiante = %s "
+                "UNION ALL "
+                "SELECT 'docente' AS tipo FROM docentes WHERE id_docente = %s"
+            )
+            values_tipo_usuario = (self._id_usuario, self._id_usuario)
+            result_tipo_usuario = db.execute_query(query_tipo_usuario, values_tipo_usuario)
+
+            if not result_tipo_usuario:
+                print("Usuario no encontrado.")
+                return
+
+            tipo_usuario = result_tipo_usuario[0][0]
+
+            # Verificar la cantidad total de libros reservados por el usuario
+            query_libros_reservados = "SELECT cantidad FROM pedidos WHERE id_usuario = %s AND id_libro = %s"
+            values_libros_reservados = (self._id_usuario, self._id_libro)
+            result_libros_reservados = db.execute_query(query_libros_reservados, values_libros_reservados)
+
+            if not result_libros_reservados:
+                print(f"No hay reservas de libros con el ID {self._id_libro} para el usuario {self._id_usuario}.")
+                return
+
+            libros_reservados = result_libros_reservados[0][0]
+
+            if libros_reservados < self._cantidad:
+                print(f"No puedes devolver más libros de los que tienes reservados. Libros reservados: {libros_reservados}")
+                return
+
+            # Actualizar y sumar la cantidad del stock en la tabla libros
+            query_update_stock = "UPDATE libros SET stock = stock + %s WHERE id_libro = %s"
+            values_update_stock = (self._cantidad, self._id_libro)
+            db.execute_query(query_update_stock, values_update_stock)
+
+            # Actualizar la cantidad de libros reservados en la tabla pedidos
+            nueva_cantidad_reservada = libros_reservados - self._cantidad
+            if nueva_cantidad_reservada > 0:
+                query_update_pedido = "UPDATE pedidos SET cantidad = %s WHERE id_usuario = %s AND id_libro = %s"
+                values_update_pedido = (nueva_cantidad_reservada, self._id_usuario, self._id_libro)
+                db.execute_query(query_update_pedido, values_update_pedido)
+            else:
+                query_delete_pedido = "DELETE FROM pedidos WHERE id_usuario = %s AND id_libro = %s"
+                values_delete_pedido = (self._id_usuario, self._id_libro)
+                db.execute_query(query_delete_pedido, values_delete_pedido)
+
+            db.connection.commit()  # Confirmar la transacción
+
+            libros_pendientes = max(nueva_cantidad_reservada, 0)
+
+            if libros_pendientes > 0:
+                print(f"Aún tienes {libros_pendientes} libros pendientes por entregar")
+            else:
+                print("\n\tLibro(s) entregado(s) exitosamente")
+
+        except Exception as e:
+            print("\nError al entregar el libro:", e)
+        finally:
+            db.disconnect()
