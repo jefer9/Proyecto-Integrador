@@ -8,7 +8,7 @@ import "../styles/App.css";
 function Home() {
   return (
     <>
-      <div className="layout-main h-screen w-screen">
+      <div className="h-screen w-screen">
         <div className=" w-full flex items-center justify-between">
           {/* barra de navegacion y componente para el login y el registro */}
           <Nav />

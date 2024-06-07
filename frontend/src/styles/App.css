@@ -1,16 +1,6 @@
-/* .layout-main{
-    background: url(../../fondos/inicio.webp) no-repeat center fixed;
-    background-size: 100% 100%;
-
-} */
-/* 
-.logo-athena{
-    background: url(../../public/FONDOS2/fondo-athenas.svg);
-}
- */
 
 .footer{
-    background: url(../../public/FONDOS2/fondo-footer.webp) no-repeat;
+    background: url(../../FONDOS2/fondo-footer.webp) no-repeat;
 }
 
 .fondo-libros{
@@ -21,6 +11,10 @@
 .gafas-img{
     width: 180px;
     height: 90px;
+}
+
+.libros-fondo-galeria{
+    width: 950px;
 }
 
 
