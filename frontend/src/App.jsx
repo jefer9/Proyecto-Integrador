@@ -1,14 +1,18 @@
 import Home from "./pages/home";
 import Galery from "./pages/galery";
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
+import Book from "./pages/Book";
+import ScrollToTop from "./components/scrollToTop";
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Galery" element={<Galery/>}/>
-      </Routes>
+        <ScrollToTop/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Galery" element={<Galery />} />
+          <Route path="/Book/:id" element={<Book />} />
+        </Routes>
     </>
   );
 }
