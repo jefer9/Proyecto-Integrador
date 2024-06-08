@@ -76,10 +76,3 @@ class Pedido:
             print("Error al encontrar los pedidos", e)
         finally:
             db.disconnect()
-
-
-
-
-
-
-

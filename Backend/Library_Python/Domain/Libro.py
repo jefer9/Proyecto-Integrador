@@ -56,6 +56,7 @@ class Libro:
     def stock(self, stock):
         self._stock = stock
 
+    # CRUD LIBRO **********************************************
     def crear_libro(self):
         print("\n\tIngresar el libro\n")
         print("Ingresa los siguientes datos:")
@@ -160,7 +161,7 @@ class Libro:
                           f"Autor: {row[2]}\n"
                           f"Editorial: {row[3]}\n"
                           f"Genero: {row[4]}\n"
-                          f"Stock: {row[5]}")  # Imprime cada fila de datos
+                          f"Stock: {row[5]}")
             else:
                 print("\n\tLibro no encontrado")
 

@@ -27,7 +27,7 @@ class Estudiante(Lector):
                             "4. Salir: "))
             if opc == 1:
                 lector = Lector(None,None,None,None,None,None)
-                lector.visualizar_libros()
+                lector.lista_libros()
             elif opc == 2:
                 estudiante = Lector(None,None,None,None,None,None)
                 estudiante.reservar_libro()
@@ -39,6 +39,3 @@ class Estudiante(Lector):
             else:
                 print("Ingrese la opcion valida")
                 continue
-
-
-
