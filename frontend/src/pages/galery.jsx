@@ -1,8 +1,9 @@
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
-import librosFondoGaleria from "../../public/FONDOS2/libros-fondo2.webp";
-import "../styles/App.css"
+import portadaLibros from "../assets/libros.json";
+import "../styles/App.css";
+import LibroPortada from "../components/libroPortada";
 
 function Galery() {
   return (
@@ -12,19 +13,29 @@ function Galery() {
         <Nav />
         <Pill />
       </div>
-      <div className="mt-20 w-11/12 mx-auto">
-          <figure className=" w-full">
-            <img src={librosFondoGaleria} alt="libros-fondo-galeria" className=" absolute libros-fondo-galeria" />
-          </figure>
-        <div className=" z-10 flex justify-center items-center flex-col">
+      <div className="mt-4 w-11/12 mx-auto">
+        <div className="flex justify-center items-center flex-col">
+          <div className="flex flex-col w-full items-center">
+            <p className=" text-[72px] font-semibold text-[var(--secondary-color)]">
+              GALERÍA
+            </p>
+            <input
+              type="text"
+              placeholder="Buscar:"
+              className="w-[300px]  md:w-[400px] px-5 py-2 rounded-3xl 
+              text-[var(--secondary-color)] 
+              border-2 border-[var(--secondary-color)]
+              dark:![var(--secondary-color)] dark:placeholder:!text-[var(--secondary-color)] 
+              outline-none"
+            />
+          </div>
 
-          <input type="text" placeholder="Buscar" />
-          <h1>GALERÍA</h1>
-          <p>
-            Explora tu biblioteca digital repelta de infinitas posibilidades
-            para expandir
-          </p>
-          <p>tus horizontes y enriquecer tu mente</p>
+          {/* portadas con todos los libros */}
+          <div className="flex flex-wrap gap-x-7 gap-y-5 justify-center my-10">
+            {portadaLibros.map((libro, index) => (
+              <LibroPortada libro={libro} key={index}/>
+            ))}
+          </div>
         </div>
       </div>
       <Footer />

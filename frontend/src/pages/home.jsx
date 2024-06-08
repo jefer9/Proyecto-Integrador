@@ -8,13 +8,13 @@ import "../styles/App.css";
 function Home() {
   return (
     <>
-      <div className="h-screen w-screen">
+      <div className=" min-h-screen flex flex-col">
         <div className=" w-full flex items-center justify-between">
           {/* barra de navegacion y componente para el login y el registro */}
           <Nav />
           <Pill />  
         </div>
-        <div className="mt-8 flex font-roboto w-3/4 mx-auto">
+        <div className="mt-8 flex-grow flex font-roboto w-3/4 mx-auto">
           <div className=" ">
             <p className="text-[48px] md:text-[62px] font-semibold h-14 text-[var(--secondary-color)]">TU BIBLIOTECA</p>
             <p className="text-[70px] md:text-[100px] font-black tracking-high text-[var(--primary-color)] h-32">DIGITAL</p>
