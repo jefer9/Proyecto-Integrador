@@ -16,7 +16,7 @@ function Pill() {
                 <img src={userIcon} alt="" />
                 <Link to="/Register" className=" mx-3">Registro</Link>
                 <span className=" font-bold">|</span>
-                <a href="#" className=" mx-3">Acceso</a>
+                <Link to="/SignIn" className=" mx-3">Acceso</Link>
             </div>
         </div>
         </>
