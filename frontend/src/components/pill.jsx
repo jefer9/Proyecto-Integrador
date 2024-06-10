@@ -10,7 +10,7 @@ function Pill() {
         -pero si la persona si esta logeada el componente solo debe de mostrar el nombre del usuario que esta logeado esto se logra con el localStorage y la bd
         */}
 
-        <div className=" bg-[#484596] h-14 rounded-s-full">
+        <div className=" bg-[var(--secondary-color)] h-14 rounded-s-full">
             <div className="flex pr-6 pl-2 items-center justify-center h-full text-white font-roboto">
                 <img src={userIcon} alt="" />
                 <a href="#" className=" mx-3">Registro</a>

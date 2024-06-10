@@ -8,7 +8,7 @@ import LibroPortada from "../components/libroPortada";
 function Galery() {
   return (
     <div>
-      <div className=" w-full flex items-center justify-between">
+      <div className=" w-full flex items-center justify-between h-32">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />
         <Pill />

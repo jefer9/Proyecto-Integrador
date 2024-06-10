@@ -9,7 +9,7 @@ function Home() {
   return (
     <>
       <div className=" min-h-screen flex flex-col">
-        <div className=" w-full flex items-center justify-between">
+        <div className=" w-full flex items-center justify-between h-32">
           {/* barra de navegacion y componente para el login y el registro */}
           <Nav />
           <Pill />  

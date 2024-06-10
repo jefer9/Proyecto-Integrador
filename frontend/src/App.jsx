@@ -1,6 +1,6 @@
 import Home from "./pages/home";
 import Galery from "./pages/galery";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Book from "./pages/Book";
 import ScrollToTop from "./components/scrollToTop";
 
