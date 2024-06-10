@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import userIcon from "../assets/icons/user.svg"
 
 function Pill() {
@@ -13,7 +14,7 @@ function Pill() {
         <div className=" bg-[var(--secondary-color)] h-14 rounded-s-full">
             <div className="flex pr-6 pl-2 items-center justify-center h-full text-white font-roboto">
                 <img src={userIcon} alt="" />
-                <a href="#" className=" mx-3">Registro</a>
+                <Link to="/Register" className=" mx-3">Registro</Link>
                 <span className=" font-bold">|</span>
                 <a href="#" className=" mx-3">Acceso</a>
             </div>
