@@ -1,37 +1,67 @@
-
-.footer{
-    background: url(../../FONDOS2/fondo-footer.webp) no-repeat;
+.main-content {
+  display: block;
+  height: 70%;
 }
 
-.fondo-libros{
-    width: 400px;
-    height: 400px;
+
+
+.footer {
+  background: url(../../FONDOS2/fondo-footer.webp) no-repeat;
 }
 
-.gafas-img{
-    width: 180px;
-    height: 90px;
+.fondo-libros {
+  width: 400px;
+  height: 400px;
 }
 
-.libros-fondo-galeria{
-    width: 950px;
+.gafas-img {
+  width: 180px;
+  height: 90px;
 }
 
+.libros-fondo-galeria {
+  width: 950px;
+}
+
+/* Estilos para los elementos link de la barra de navegacion */
+
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: rgb(73, 68, 150); /* Cambia esto al color que prefieras */
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ----------------------------- */
 
 @media (max-width: 1024px) {
-    .fondo-libros{
-        width: 300px;
-        height: 300px;
-    }
-    .gafas-img{
-        width: 140px;
-        height: 70px;
-    }
+  .fondo-libros {
+    width: 300px;
+    height: 300px;
+  }
+  .gafas-img {
+    width: 140px;
+    height: 70px;
+  }
 }
 
 @media (max-width: 768px) {
-    .fondo-libros,
-    .gafas-img{
-        display: none;
-    }
+  .fondo-libros,
+  .gafas-img {
+    display: none;
+  }
 }

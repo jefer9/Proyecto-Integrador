@@ -7,14 +7,14 @@ import { Link } from "react-router-dom";
 
 function SignIn() {
   return (
-    <div>
+    <div className="main-content">
       <div className=" w-full flex items-center justify-between h-32">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />
         <Pill />
       </div>
-      <div className="w-2/3 mx-auto my-5">
-        <div className="grid md:grid-cols-2 gap-x-5 mb-16">
+      <div className="w-2/3 mx-auto mt-5 min-h-full">
+        <div className="grid md:grid-cols-2 gap-x-5">
           <img src={signIn} alt="" />
           <div className="flex flex-col items-center justify-around ">
             <p className="text-[var(--secondary-color)] text-5xl font-semibold">

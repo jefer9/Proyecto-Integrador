@@ -11,7 +11,7 @@ function Book() {
   const libro = portadaLibros.find((libro) => libro.id === parseInt(id));
 
   return (
-    <div>
+    <div className="main-content">
       <div className=" w-full flex items-center justify-between h-32">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />

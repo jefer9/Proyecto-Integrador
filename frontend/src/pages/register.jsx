@@ -4,7 +4,7 @@ import Pill from "../components/pill";
 
 function Register() {
   return (
-    <div>
+    <div className="main-content">
       <div className=" w-full flex items-center justify-between h-32">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />
