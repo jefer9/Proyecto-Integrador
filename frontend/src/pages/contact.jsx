@@ -1,3 +1,4 @@
+/* hecho por jaider*/
 import React from 'react';
 import Footer from "../components/footer";
 import Nav from "../components/nav";
