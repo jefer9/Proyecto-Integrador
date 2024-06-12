@@ -1,5 +1,6 @@
 from Backend.Library_Python.Domain.Lector import Lector
 
+
 class Interface:
 
     while True:

@@ -5,19 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aa4497c-2668-4061-a943-897555cea38a" name="Changes" comment="visualizar los pedidos">
+      <change afterPath="$PROJECT_DIR$/Backend_fastapi/ConexionDB.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_fastapi/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_fastapi/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend_fastapi/services/libros.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Bibliotecario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Bibliotecario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Docente.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Docente.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Estudiante.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Estudiante.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Lector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Lector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Libro.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Libro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/Pedido.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Domain/Pedido.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/ConexionBD.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Services/Interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Services/Interface.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
@@ -29,12 +35,12 @@
     &quot;assignee&quot;: &quot;jefer9&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/jefer9/Proyecto-Integrador.git",
-    "accountId": "4a0b5667-96f5-4fc4-868a-fd453fc52550"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jefer9/Proyecto-Integrador.git&quot;,
+    &quot;accountId&quot;: &quot;c4b1c054-51ac-48e0-b1a0-c219f58ad26c&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -47,18 +53,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Bibliotecario.executor": "Run",
-    "Python.Interface.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Mauricio/Desktop/Python_desde_cero/Proyecto-Integrador - copia",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Bibliotecario.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Interface.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/PycharmProjects/fastapi2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Usuario\PycharmProjects\Proyecto-Integrador\Backend_fastapi" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Interface" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Proyecto-Integrador" />
@@ -91,7 +102,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
+        <option value="bundled-python-sdk-48aec45f0201-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.17011.127" />
       </set>
     </attachedChunks>
   </component>
