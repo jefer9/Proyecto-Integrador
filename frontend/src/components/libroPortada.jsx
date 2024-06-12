@@ -4,7 +4,11 @@ function LibroPortada({ libro }) {
   return (
     <div className=" text-center flex flex-col">
       <Link to={"/Book/" + libro.id}>
-        <img src={libro.imagen_portada} alt={libro.titulo} className=" hover:scale-105 transition" />
+        <img
+          src={libro.imagen_portada}
+          alt={libro.titulo}
+          className=" hover:scale-105 transition h-[300px] w-[200px]"
+        />
       </Link>
       <Link to={"/Book/" + libro.id}>
         <p className="mt-2 text-[var(--secondary-color)]">{libro.titulo}</p>
