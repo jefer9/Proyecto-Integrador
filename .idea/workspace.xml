@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6aa4497c-2668-4061-a943-897555cea38a" name="Changes" comment="visualizar los pedidos">
-      <change afterPath="$PROJECT_DIR$/Backend_fastapi/ConexionDB.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend_fastapi/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend_fastapi/services/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend_fastapi/services/libros.py" afterDir="false" />
+    <list default="true" id="6aa4497c-2668-4061-a943-897555cea38a" name="Changes" comment="montaje fastApi">
+      <change afterPath="$PROJECT_DIR$/Backend/Library_Python/BackendFastApi/ConexionDB.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/Library_Python/BackendFastApi/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Domain/ConexionBD.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Library_Python/Services/Interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Library_Python/Services/Interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend_fastapi/ConexionDB.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend_fastapi/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend_fastapi/services/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend_fastapi/services/libros.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +61,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/PycharmProjects/fastapi2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/PycharmProjects/Proyecto-Integrador&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
@@ -147,13 +147,22 @@
       <option name="project" value="LOCAL" />
       <updated>1717631708072</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="montaje fastApi">
+      <option name="closed" value="true" />
+      <created>1718155879383</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718155879383</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="eliminar libro" />
     <MESSAGE value="validaciones de tipo de usuario" />
     <MESSAGE value="visualizar los pedidos" />
-    <option name="LAST_COMMIT_MESSAGE" value="visualizar los pedidos" />
+    <MESSAGE value="montaje fastApi" />
+    <option name="LAST_COMMIT_MESSAGE" value="montaje fastApi" />
   </component>
 </project>

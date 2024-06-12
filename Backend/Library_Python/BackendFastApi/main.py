@@ -123,5 +123,3 @@ def actualizar_libro(id: int = Path(..., ge=1, le=2000), libro: Libro = Body(...
 
     db.disconnect()
     return {"message": "Libro actualizado exitosamente"}
-
-
