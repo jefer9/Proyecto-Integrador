@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
-import portadaLibros from "../assets/libros.json";
+// import portadaLibros from "../assets/libros.json";
 
 function Book() {
   let { id } = useParams();

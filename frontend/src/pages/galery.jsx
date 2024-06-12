@@ -1,23 +1,43 @@
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
-import portadaLibros from "../assets/libros.json";
 import "../styles/App.css";
 import LibroPortada from "../components/libroPortada";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Galery() {
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredBooks, setFilteredBooks] = useState(portadaLibros);
+  const [books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+
+  useEffect(() => {
+    // Función para obtener los libros desde la API
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/libros"); // Asegúrate de usar la URL correcta de tu API
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setBooks(data);
+        setFilteredBooks(data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+
+    fetchBooks();
+  }, []);
 
   const handleSearch = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
 
     if (term.trim() === "") {
-      setFilteredBooks(portadaLibros);
+      setFilteredBooks(books);
     } else {
-      const filtered = portadaLibros.filter((libro) =>
+      const filtered = books.filter((libro) =>
         libro.titulo.toLowerCase().includes(term.toLowerCase())
       );
       setFilteredBooks(filtered);
@@ -48,15 +68,13 @@ function Galery() {
 
           {/* portadas con todos los libros */}
           <div className="flex flex-wrap gap-x-7 gap-y-5 justify-center my-10 flex-1">
-            {
-              filteredBooks.length > 0 ? (
-                filteredBooks.map((libro, index) => (
-                  <LibroPortada libro={libro} key={index}/>
-                ))
-              ) : (
-                <p>No existe ningun libro con ese titulo</p>
-              )
-            }
+            {filteredBooks.length > 0 ? (
+              filteredBooks.map((libro, index) => (
+                <LibroPortada libro={libro} key={index} />
+              ))
+            ) : (
+              <p>No existe ningun libro con ese titulo</p>
+            )}
           </div>
         </div>
       </div>
