@@ -1,0 +1,31 @@
+Querys de la base de datos de la biblioteca
+
+datos quemados de cada libros, se requiere primeramente agregar 2 columnas adicionales a la tabla
+la columna de año_creacion y la de image_path
+además en la columna de editorial se cambia el nombre por sinopsis y se le aumenta la cantidad de 
+caracteres a 500
+
+copiar y pegar en el xamp
+
+los datos quemados de los libros son: 
+INSERT INTO Libros (id_libro, titulo, autor, genero, sinopsis, año_creacion, image_path) VALUES
+(1, 'Álgebra de Baldor', 'Aurelio Baldor', 'Matemáticas', 'Un libro clásico de álgebra que ha ayudado a generaciones de estudiantes a entender los conceptos básicos y avanzados de esta rama de las matemáticas.', 1941, '/libros/algebra_a_baldor.webp'),
+(2, 'Cien Años de Soledad', 'Gabriel García Márquez', 'Realismo mágico', 'Entre la boda de José Arcadio Buendía con Amelia Iguarán hasta la maldición de Aureliano Babilonia transcurre todo un siglo. Cien años de soledad para una estirpe única, fantástica, capaz de fundar una ciudad tan especial como Macondo y de engendrar niños con cola de cerdo.', 1967, '/libros/cien_anos_de_soledad.webp'),
+(3, 'Colmillo Blanco', 'Jack London', 'Aventura', 'Colmillo Blanco es una novela complementaria (así como un reflejo temático) de La llamada de lo salvaje, la obra más conocida de London, que trata sobre un perro doméstico secuestrado que debe hacer uso de sus salvajes instintos ancestrales para sobrevivir y prosperar en los bosques de Alaska.', 1906, '/libros/colmillo_blanco.webp'),
+(4, 'Crimen y Castigo', 'Fiódor Dostoyevski', 'Novela psicológica', 'La historia de Raskólnikov, un joven estudiante que comete un asesinato y lucha con su conciencia.', 1866, '/libros/crimen_y_castigo.webp'),
+(5, 'Crítica de la Razón Pura', 'Immanuel Kant', 'Filosofía', 'Una obra fundamental en la filosofía moderna que trata sobre los límites y la capacidad del conocimiento humano.', 1781, '/libros/critica_de_la_razon_pura.webp'),
+(6, 'Demian', 'Hermann Hesse', 'Novela de formación', 'La historia de la juventud de Emil Sinclair y su relación con un misterioso joven llamado Demian.', 1919, '/libros/demina.webp'),
+(7, 'El Extranjero', 'Albert Camus', 'Existencialismo', 'Un relato sobre la indiferencia y la extrañeza de un hombre llamado Meursault hacia la sociedad.', 1942, '/libros/el_extranjero.webp'),
+(8, 'El Infierno de Dante', 'Dante Alighieri', 'Poesía épica', 'La primera parte de la Divina Comedia, donde Dante es guiado por el Infierno.', 1320, '/libros/el_infierno_dante.webp'),
+(9, 'La Historia del Tiempo', 'Stephen Hawking', 'Ciencia', 'Una exploración de los conceptos de espacio y tiempo, y de los orígenes y el destino del universo.', 1988, '/libros/la_historia_del_tiempo.webp'),
+(10, 'La Llamada de la Tribu', 'Mario Vargas Llosa', 'Ensayo', 'Un recorrido personal por los pensadores que influenciaron la visión política y filosófica del autor.', 2018, '/libros/la_llamada_de_la_tribu.webp'),
+(11, 'La Montaña Mágica', 'Thomas Mann', 'Novela', 'La historia de Hans Castorp en un sanatorio en los Alpes suizos, una reflexión sobre el tiempo y la enfermedad.', 1924, '/libros/la_montana_magica.webp'),
+(12, 'La Odisea', 'Homero', 'Épica', 'Las aventuras de Odiseo (Ulises) en su viaje de regreso a Ítaca tras la Guerra de Troya.', 800, '/libros/la_odisea_homero.webp'),
+(13, 'La Peste', 'Albert Camus', 'Novela', 'Una crónica sobre una epidemia de peste en la ciudad argelina de Orán y sus efectos en la población.', 1947, '/libros/la_peste.webp'),
+(14, 'La Senda del Perdedor', 'Charles Bukowski', 'Autobiografía', 'Una obra semiautobiográfica que narra la infancia y juventud de Henry Chinaski, alter ego del autor.', 1982, '/libros/la_senda_del_perdedor.webp'),
+(15, 'La Sociedad del Cansancio', 'Byung-Chul Han', 'Ensayo', 'Un análisis filosófico de la sociedad moderna y el impacto del exceso de positividad en la salud mental.', 2010, '/libros/la_sociedad_del_cansancio.webp'),
+(16, 'Noches Blancas', 'Fiódor Dostoyevski', 'Novela corta', 'Una historia sobre un joven soñador que pasa cuatro noches de insomnio paseando por San Petersburgo.', 1848, '/libros/noches_blancas.webp'),
+(17, 'Romeo y Julieta', 'William Shakespeare', 'Tragedia', 'La trágica historia de dos jóvenes amantes de familias enfrentadas en la ciudad de Verona.', 1597, '/libros/romeo_y_julieta.webp'),
+(18, 'Sapiens', 'Yuval Noah Harari', 'Ensayo', 'Una breve historia de la humanidad, desde los primeros Homo sapiens hasta las revoluciones científicas.', 2011, '/libros/sapiens.webp'),
+(19, 'Satanás', 'Mario Mendoza', 'Novela', 'Basada en hechos reales, narra la historia de un hombre que comete un acto violento y sus consecuencias.', 2002, '/libros/satanas.webp'),
+(20, 'Siddhartha', 'Hermann Hesse', 'Novela', 'La búsqueda espiritual de un hombre en la antigua India, influenciada por las enseñanzas de Buda.', 1922, '/libros/siddhartha.webp');
