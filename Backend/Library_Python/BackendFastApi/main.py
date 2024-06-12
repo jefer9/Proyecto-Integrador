@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException, Path, Body
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 from ConexionDB import ConexionBD
@@ -7,22 +9,58 @@ from ConexionDB import ConexionBD
 app = FastAPI()
 app.title = "Atena"
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permitir todas las orígenes
+    allow_credentials=True,
+    allow_methods=["*"],  # Permitir todos los métodos
+    allow_headers=["*"],  # Permitir todas las cabeceras
+)
+#montar la carpeta con las imagenes de los libros como archivos estaticos
+app.mount("/libros", StaticFiles(directory="libros"), name="libros")
 
 @app.get('/', tags=['libros'])
 def message():
     return HTMLResponse('<h1>Hello world</h1>')
 
-
 class Libro(BaseModel):
     id: Optional[int] = None
     titulo: str
     autor: str
-    editorial: str
+    sinopsis: str
     genero: str
-    stock: int
+    añoCreacion: int
+    stock: Optional[int] = None
+    image: str
 
+#metodo para traer todos los libros de la bd
+@app.get('/libros', tags=['libros'], response_model=list[Libro], status_code=200)
+def get_libros():
+    db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+    db.connect()
 
-@app.get('/libros/{id}', tags=['libros'], response_model=Libro)
+    query = "SELECT * FROM Libros"
+    result = db.execute_query(query)
+
+    db.disconnect()
+
+    libros = []
+    for row in result:
+        libro = Libro(
+            id=row[0],
+            titulo=row[1],
+            autor=row[2],
+            sinopsis=row[3],
+            genero=row[4],
+            stock=row[5],
+            image=row[6],
+            añoCreacion=row[7]
+        )
+        libros.append(libro)
+    
+    return libros
+#metodo para buscar libro por id
+@app.get('/libros/{id}', tags=['libros'], response_model=Libro, status_code=200)
 def buscar_libro(id: int = Path(..., ge=1, le=2000)) -> Libro:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
     db.connect()
@@ -39,23 +77,25 @@ def buscar_libro(id: int = Path(..., ge=1, le=2000)) -> Libro:
             id=row[0],
             titulo=row[1],
             autor=row[2],
-            editorial=row[3],
+            sinopsis=row[3],
             genero=row[4],
-            stock=row[5]
+            añoCreacion=row[5],
+            stock=row[6],
+            image=row[7] 
         )
         return libro
     else:
         raise HTTPException(status_code=404, detail="Libro no encontrado")
 
-
+#metodo para crear libro
 @app.post('/libros', tags=['libros'], response_model=dict, status_code=201)
 def crear_libro(libro: Libro) -> dict:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
     db.connect()
 
     try:
-        query = "INSERT INTO libros (id_libro, titulo, autor, editorial, genero, stock) VALUES (%s, %s, %s, %s, %s, %s)"
-        values = (libro.id, libro.titulo, libro.autor, libro.editorial, libro.genero, libro.stock)
+        query = "INSERT INTO libros (id_libro, titulo, autor, sinopsis, genero, stock, año_creacion, image_path) VALUES (%s, %s, %s, %s, %s, %s)"
+        values = (libro.id, libro.titulo, libro.autor, libro.sinopsis, libro.genero, libro.stock)
         db.execute_query(query, values)
     except Exception as e:
         db.disconnect()
@@ -65,7 +105,7 @@ def crear_libro(libro: Libro) -> dict:
 
     return {"message": "Libro agregado exitosamente"}
 
-
+#metodo para eliminar un libro
 @app.delete('/libros/{id}', tags=['libros'], response_model=dict)
 def eliminar_libro(id: int = Path(..., ge=1, le=2000)) -> dict:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
@@ -93,6 +133,7 @@ def eliminar_libro(id: int = Path(..., ge=1, le=2000)) -> dict:
 
     return {"message": "Libro eliminado exitosamente"}
 
+#metodo para editar un libro
 @app.put('/libros/{id}', tags=['libros'], response_model=dict, status_code=200)
 def actualizar_libro(id: int = Path(..., ge=1, le=2000), libro: Libro = Body(...)):
     try:
@@ -111,10 +152,10 @@ def actualizar_libro(id: int = Path(..., ge=1, le=2000), libro: Libro = Body(...
         # Actualizar el libro
         update_query = """
             UPDATE Libros 
-            SET titulo = %s, autor = %s, editorial = %s, genero = %s, stock = %s 
+            SET titulo = %s, autor = %s, sinopsis = %s, genero = %s, stock = %s, año_creacion = %s, image_path = %s
             WHERE id_libro = %s
         """
-        update_values = (libro.titulo, libro.autor, libro.editorial, libro.genero, libro.stock, id)
+        update_values = (libro.titulo, libro.autor, libro.sinopsis, libro.genero, libro.stock, libro.añoCreacion, libro.image, id)
         db.execute_query(update_query, update_values)
 
     except Exception as e:
