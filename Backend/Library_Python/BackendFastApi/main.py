@@ -2,10 +2,10 @@ from fastapi import FastAPI, HTTPException, Path, Body
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, datetime_parse
+from typing import Optional, List
 from ConexionDB import ConexionBD
-from datetime import datetime
+from datetime import datetime, date
 
 app = FastAPI()
 app.title = "Atena"
@@ -41,6 +41,14 @@ class Estudiante(BaseModel):
     telefono: int
     email: str
     contrasena: str
+
+class Pedido(BaseModel):
+    id: int
+    id_usuario: int
+    id_libro: int
+    titulo_libro: str
+    cantidad: int
+    fecha: date
 
 #metodo para traer todos los libros de la bd
 @app.get('/libros', tags=['libros'], response_model=list[Libro], status_code=200)
@@ -176,8 +184,9 @@ def actualizar_libro(id: int = Path(..., ge=1, le=2000), libro: Libro = Body(...
     db.disconnect()
     return {"message": "Libro actualizado exitosamente"}
 
-@app.post('/libros/{id}', tags=['libros'], response_model=dict, status_code=201)
-def reservar_libro(id: int = Path(..., ge=1, le=2000), estudiante:Estudiante = (...)) -> dict:
+@app.post('/libros/{id}/reservar', tags=['libros'], response_model=dict, status_code=201)
+def reservar_libro(
+    id: int = Path(..., ge=1, le=2000), estudiante: Estudiante = Body(...)) -> dict:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
     db.connect()
 
@@ -291,3 +300,60 @@ def login(usuario: Usuario):
         raise HTTPException(status_code=400, detail=str(e))
     finally:
         db.disconnect()
+
+
+@app.get('/pedidos', tags=['pedidos'], response_model=List[Pedido], status_code=200)
+def visualizar_pedidos() -> List[Pedido]:
+    db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+    try:
+        db.connect()
+        query = "SELECT * FROM pedidos"
+        result = db.execute_query(query)
+        pedidos = []
+        for row in result:
+            pedido = Pedido(
+                id=row[0],
+                id_usuario=row[1],
+                id_libro=row[2],
+                titulo_libro=row[3],
+                cantidad=row[4],
+                fecha=row[5]
+            )
+            pedidos.append(pedido)
+        return pedidos
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.disconnect()
+
+
+@app.get('/pedidos/{id}', tags=['pedidos'], response_model=Pedido, status_code=200)
+def visualizar_pedido(id: int) -> Pedido:
+    db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+    try:
+        db.connect()
+
+        query = "SELECT id_pedido, id_usuario, id_libro, titulo_libro, cantidad, fecha FROM pedidos WHERE id_pedido = %s"
+        values = (id,)
+        result = db.execute_query(query, values)
+
+        if result:
+            row = result[0]
+            pedido = Pedido(
+                id=row[0],
+                id_usuario=row[1],
+                id_libro=row[2],
+                titulo_libro=row[3],
+                cantidad=row[4],
+                fecha=row[5]
+            )
+            return pedido
+        else:
+            raise HTTPException(status_code=404, detail="Pedido no encontrado")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.disconnect()
+
+
+
