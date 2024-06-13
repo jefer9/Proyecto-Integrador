@@ -2,13 +2,39 @@ import { useParams } from "react-router-dom";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
-// import portadaLibros from "../assets/libros.json";
+import { useEffect, useState } from "react";
 
 function Book() {
   let { id } = useParams();
-  console.log(id);
+  const [libro, setLibro] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const libro = portadaLibros.find((libro) => libro.id === parseInt(id));
+  useEffect(() => {
+    fetch(`http://localhost:8000/libros/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Libro no encontrado");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLibro(data);
+        console.log(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) {
+    return <p>Cargando...</p>;
+  }
+
+
+  const imageUrl = `http://localhost:8000${libro.image_path}`;
 
   return (
     <div className="main-content">
@@ -22,7 +48,7 @@ function Book() {
           <div className="flex gap-5 h-full my-auto">
             <div className=" w-1/3">
               <img
-                src={libro.imagen_portada}
+                src={imageUrl}
                 alt={libro.titulo}
                 className="mt-4 h-[400px] w-[300px]"
               />
@@ -38,7 +64,7 @@ function Book() {
               </p>
               <p className="mt-2">
                 <strong>Año de Creación: </strong>
-                {libro.año_creacion}
+                {libro.añoCreacion}
               </p>
               <p className="mt-2">
                 <strong>Género: </strong>

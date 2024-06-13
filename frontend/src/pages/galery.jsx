@@ -13,15 +13,16 @@ function Galery() {
 
   useEffect(() => {
     // Función para obtener los libros desde la API
-    const fetchBooks = async () => {
+    const fetchBooks = async () => {  
       try {
-        const response = await fetch("http://localhost:8000/libros"); // Asegúrate de usar la URL correcta de tu API
+        const response = await fetch("http://localhost:8000/libros"); 
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
         setBooks(data);
         setFilteredBooks(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching books:", error);
       }
