@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],  # Permitir todas las cabeceras
 )
 #montar la carpeta con las imagenes de los libros como archivos estaticos
-app.mount("/libros", StaticFiles(directory="libros"), name="libros")
+app.mount("/libros_imagen", StaticFiles(directory="libros_imagen"), name="libros_imagen")
 
 @app.get('/', tags=['libros'])
 def message():
@@ -31,7 +31,7 @@ class Libro(BaseModel):
     genero: str
     añoCreacion: int
     stock: Optional[int] = None
-    image: str
+    image_path: str
 
 #metodo para traer todos los libros de la bd
 @app.get('/libros', tags=['libros'], response_model=list[Libro], status_code=200)
@@ -53,13 +53,14 @@ def get_libros():
             sinopsis=row[3],
             genero=row[4],
             stock=row[5],
-            image=row[6],
+            image_path=row[6],
             añoCreacion=row[7]
         )
         libros.append(libro)
     
     return libros
-#metodo para buscar libro por id
+
+# metodo para buscar libro por id
 @app.get('/libros/{id}', tags=['libros'], response_model=Libro, status_code=200)
 def buscar_libro(id: int = Path(..., ge=1, le=2000)) -> Libro:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
@@ -79,13 +80,14 @@ def buscar_libro(id: int = Path(..., ge=1, le=2000)) -> Libro:
             autor=row[2],
             sinopsis=row[3],
             genero=row[4],
-            añoCreacion=row[5],
-            stock=row[6],
-            image=row[7] 
+            stock=row[5],
+            image_path=row[6], 
+            añoCreacion=row[7],
         )
         return libro
     else:
         raise HTTPException(status_code=404, detail="Libro no encontrado")
+
 
 #metodo para crear libro
 @app.post('/libros', tags=['libros'], response_model=dict, status_code=201)
@@ -94,8 +96,8 @@ def crear_libro(libro: Libro) -> dict:
     db.connect()
 
     try:
-        query = "INSERT INTO libros (id_libro, titulo, autor, sinopsis, genero, stock, año_creacion, image_path) VALUES (%s, %s, %s, %s, %s, %s)"
-        values = (libro.id, libro.titulo, libro.autor, libro.sinopsis, libro.genero, libro.stock)
+        query = "INSERT INTO libros (id_libro, titulo, autor, sinopsis, genero, stock, año_creacion, image_path) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        values = (libro.id, libro.titulo, libro.autor, libro.sinopsis, libro.genero, libro.stock, libro.añoCreacion, libro.image)
         db.execute_query(query, values)
     except Exception as e:
         db.disconnect()
