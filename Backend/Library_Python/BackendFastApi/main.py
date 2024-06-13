@@ -177,7 +177,7 @@ def actualizar_libro(id: int = Path(..., ge=1, le=2000), libro: Libro = Body(...
     return {"message": "Libro actualizado exitosamente"}
 
 @app.post('/libros/{id}', tags=['libros'], response_model=dict, status_code=201)
-def reservar_libro(id: int = Path(..., ge=1, le=2000), estudiante=None) -> dict:
+def reservar_libro(id: int = Path(..., ge=1, le=2000), estudiante:Estudiante = (...)) -> dict:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
     db.connect()
 
