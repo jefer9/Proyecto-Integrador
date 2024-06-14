@@ -265,13 +265,13 @@ def login(usuario: Usuario):
         db.connect()
 
         query = (
-            "SELECT 'estudiante' AS tipo, email_estudiante AS email, contrasena_estudiante AS contrasena "
+            "SELECT 'estudiante' AS tipo, email_estudiante AS email, contrasena_estudiante AS contrasena, nombre_estudiante AS nombre "
             "FROM estudiantes WHERE email_estudiante = %s AND contrasena_estudiante = %s "
             "UNION ALL "
-            "SELECT 'docente' AS tipo, email_docente AS email, contrasena_docente AS contrasena "
+            "SELECT 'docente' AS tipo, email_docente AS email, contrasena_docente AS contrasena, nombre_docente AS nombre "
             "FROM docentes WHERE email_docente = %s AND contrasena_docente = %s "
             "UNION ALL "
-            "SELECT 'bibliotecario' AS tipo, email_bibliotecario AS email, contrasena_bibliotecario AS contrasena "
+            "SELECT 'bibliotecario' AS tipo, email_bibliotecario AS email, contrasena_bibliotecario AS contrasena, nombre_bibliotecario AS nombre "
             "FROM bibliotecario WHERE email_bibliotecario = %s AND contrasena_bibliotecario = %s"
         )
 
@@ -279,25 +279,22 @@ def login(usuario: Usuario):
         result = db.execute_query(query, values)
 
         if result:
-            for row in result:
-                tipo = row[0]
-                email_usuario = row[1]
-                contrasena_usuario = row[2]
+            row = result[0]
+            tipo = row[0]
+            email_usuario = row[1]
+            contrasena_usuario = row[2]
+            nombre_usuario = row[3]
 
-                if tipo == 'bibliotecario' and email_usuario == "b" and contrasena_usuario == '123':
-                    return {"message": "credenciales correctas bienvenido"}
+            if tipo == 'bibliotecario' and email_usuario == "b" and contrasena_usuario == '123':
+                return {"message": "credenciales correctas bienvenido", "usuario": {"tipo": tipo, "email": email_usuario, "nombre": nombre_usuario}}
 
-                elif tipo == 'docente' and email_usuario == usuario.email and contrasena_usuario == usuario.contrasena:
-                    return {"message": "credenciales correctas bienvenido"}
-
-                elif tipo == 'estudiante' and email_usuario == usuario.email and contrasena_usuario == usuario.contrasena:
-                    return {"message": "credenciales correctas bienvenido"}
+            return {"message": "credenciales correctas bienvenido", "usuario": {"tipo": tipo, "email": email_usuario, "nombre": nombre_usuario}}
         else:
             return {"message": "usuario y/o contraseña incorrecta"}
-
+        
     except Exception as e:
         db.disconnect()
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail="Error de conexion")
     finally:
         db.disconnect()
 
