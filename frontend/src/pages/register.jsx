@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+
+  const goHome = useNavigate()
+
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -56,6 +60,7 @@ function Register() {
 
       if (response.ok) {
         alert(data.message);
+        goHome("/")
       } else {
         alert(data.detail);
       }
