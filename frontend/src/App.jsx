@@ -6,6 +6,7 @@ import ScrollToTop from "./components/scrollToTop";
 import Register from "./pages/register";
 import SignIn from "./pages/signIn";
 import Contacto from "./pages/contact";
+import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/Contacto" element={<Contacto />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
     </>
   );

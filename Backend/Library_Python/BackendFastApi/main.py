@@ -239,27 +239,15 @@ def registro_estudiante(estudiante: Estudiante) -> dict:
         db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
         db.connect()
 
-        # Verificar si el ID ya existe en la tabla de estudiantes
-        check_query = "SELECT COUNT(*) FROM estudiantes WHERE id_estudiante = %s"
-        check_values = (estudiante.id,)
-        check_result = db.execute_query(check_query, check_values)
-
-        if check_result[0][0] > 0:
-            raise HTTPException(status_code=400, detail="El ID del estudiante ya está en uso")
-
-        # Insertar el nuevo estudiante
-        query = (
-            "INSERT INTO estudiantes (id_estudiante, nombre_estudiante, apellido_estudiante, telefono_estudiante, email_estudiante, contrasena_estudiante) "
-            "VALUES (%s, %s, %s, %s, %s, %s)"
-        )
+        query = "INSERT INTO estudiantes (id_estudiante, nombre_estudiante, apellido_estudiante, telefono_estudiante, email_estudiante, contrasena_estudiante) VALUES (%s, %s, %s, %s, %s, %s)"
         values = (estudiante.id, estudiante.nombre, estudiante.apellido, estudiante.telefono, estudiante.email,
                   estudiante.contrasena)
 
         db.execute_query(query, values)
-
+        db.disconnect()
         return {"message": "Estudiante registrado exitosamente"}
-
     except Exception as e:
+        db.disconnect()
         raise HTTPException(status_code=400, detail=str(e))
     finally:
         db.disconnect()
