@@ -1,14 +1,69 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
 
 function Register() {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    apellido: "",
+    correo: "",
+    cedula: "",
+    tipoUsuario: "estudiante",
+    terminos: false,
+    contrasena: "",
+    telefono: "",
+  });
 
-  useEffect(() =>{
-    fetch("http://localhost/8000/register_estudiantes")
-    
-  })
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!formData.terminos) {
+      alert("Debe aceptar los términos y condiciones.");
+      return;
+    }
+
+    const estudiante = {
+      id: parseInt(formData.cedula),
+      nombre: formData.nombre,
+      apellido: formData.apellido,
+      telefono: formData.telefono,
+      email: formData.correo,
+      contrasena: formData.contrasena,
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/register_estudiantes",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(estudiante),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message);
+      } else {
+        alert(data.detail);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Hubo un error al registrar el estudiante.");
+    }
+  };
 
   return (
     <div className="main-content">
@@ -17,12 +72,12 @@ function Register() {
         <Nav />
         <Pill />
       </div>
-      <div className=" w-1/2 mx-auto mt-5">
-        <p className=" text-center text-[72px] font-semibold text-[var(--secondary-color)]">
+      <div className=" w-1/2 mx-auto mt-4">
+        <p className=" text-center text-[68px] font-semibold text-[var(--secondary-color)]">
           REGISTRARSE
         </p>
         <form
-          action=""
+          onSubmit={handleSubmit}
           className=" w-full grid grid-cols-1 md:grid-cols-2 my-5 gap-y-5 gap-x-10"
         >
           <div>
@@ -33,11 +88,13 @@ function Register() {
               type="text"
               name="nombre"
               id="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              required
               className="block w-full mt-2 px-3 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
           </div>
-
           <div>
             <label htmlFor="apellido" className="text-[var(--secondary-color)]">
               Apellido:
@@ -46,6 +103,9 @@ function Register() {
               type="text"
               name="apellido"
               id="apellido"
+              required
+              value={formData.apellido}
+              onChange={handleChange}
               className="block w-full mt-2 px-3 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
@@ -58,6 +118,9 @@ function Register() {
               type="email"
               name="correo"
               id="correo"
+              required
+              value={formData.correo}
+              onChange={handleChange}
               className="block w-full mt-2 px-3 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
@@ -70,37 +133,86 @@ function Register() {
               type="number"
               name="cedula"
               id="cedula"
+              required
+              value={formData.cedula}
+              onChange={handleChange}
               className="block w-full mt-2 px-3 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
           </div>
           <div>
-            <label htmlFor="tipo-usuario" className="mr-3">Estudiante:</label>
+            <label htmlFor="telefono" className="text-[var(--secondary-color)]">
+              Telefono:
+            </label>
+            <input
+              type="number"
+              name="telefono"
+              id="telefono"
+              required
+              value={formData.telefono}
+              onChange={handleChange}
+              className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+              focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="contrasena"
+              className="text-[var(--secondary-color)]"
+            >
+              Contraseña:
+            </label>
+            <input
+              type="password"
+              name="contrasena"
+              id="contrasena"
+              required
+              className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+              focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
+              value={formData.contrasena}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="tipo-usuario" className="mr-3">
+              Estudiante:
+            </label>
             <input
               type="radio"
               name="tipo-usuario"
               id="estudiante"
               className=""
+              required
+              value="estudiante"
+              checked={formData.tipoUsuario === "estudiante"}
+              onChange={handleChange}
             />
           </div>
           <div>
-            <label htmlFor="tipo-usuario" className="mr-3">Docente:</label>
-            <input type="radio" name="tipo-usuario" id="docente" className="" />
-          </div>
-          <div>
-            <input 
-            type="checkbox" 
-            name="terminos" 
-            id="terminos" 
-            className=" mr-3" />
-            <label htmlFor="terminos" className="text-[var(--secondary-color)] font-medium">Aceptar terminos y condiciones</label>
+            <input
+              type="checkbox"
+              name="terminos"
+              id="terminos"
+              className=" mr-3"
+              checked={formData.terminos}
+              onChange={handleChange}
+            />
+            <label
+              htmlFor="terminos"
+              className="text-[var(--secondary-color)] font-medium"
+            >
+              Aceptar terminos y condiciones
+            </label>
+          </div>  
+          <div className="text-center">
+            <button
+              type="submit"
+              className=" mb-6 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg"
+            >
+              Registrarse
+            </button>
           </div>
         </form>
-        <div className="text-center">
-          <button className=" mb-6 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg">
-            Registrarse
-          </button>
-        </div>
       </div>
       <Footer />
     </div>

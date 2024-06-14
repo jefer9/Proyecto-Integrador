@@ -249,7 +249,7 @@ def registro_estudiante(estudiante: Estudiante) -> dict:
         return {"message": "Estudiante registrado exitosamente"}
     except Exception as e:
         db.disconnect()
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail="Error al registrar usuario")
     finally:
         db.disconnect()
 
