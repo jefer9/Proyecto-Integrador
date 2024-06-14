@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
 
 function Register() {
+
+  useEffect(() =>{
+    fetch("http://localhost/8000/register_estudiantes")
+    
+  })
+
   return (
     <div className="main-content">
       <div className=" w-full flex items-center justify-between h-32">
