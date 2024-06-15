@@ -14,49 +14,53 @@ const Contacto = () => {
         <Nav />
         <Pill />
       </div>
-      <div className="container mx-auto px-4">
-        {/* Título de la página */}
-        <h1 className="text-purple-800 text-6xl font-bold mx-2 mt-12 uppercase">
-          Contacto
-        </h1>
-        <p className="mt-20 mb-8 mx-2 font-bold ">
-          Para nosotros es muy importante saber tus necesidades
-        </p>
-        {/* Formulario de contacto */}
-        <div className="flex items-center space-x-2 mb-2 mx-2">
-          <input
-            type="text"
-            className="border-4 border-purple-800 rounded-full p-2 text-black w-1/1"
-            placeholder="Nombre:"
-          />
-          <input
-            type="email"
-            className="border-4 border-purple-800 rounded-full p-2 text-black w-1/1"
-            placeholder="Email"
-          />
+      <div className="">
+        <div className=" w-1/2 mr-auto pr-4 pl-24  flex flex-col justify-start items-start">
+          <h1 className="text-[var(--secondary-color)] text-[72px] font-semibold mt-8 uppercase">
+            Contacto
+          </h1>
+          <span className="text-3xl font-bold text-[var(--secondary-color)]">
+            - - - - - - - - - - -
+          </span>
+          <p className=" font-medium pr-48 w-3/4">
+            Para nosotros es muy importante saber tus necesidades
+          </p>
+          <div className="flex items-center mb-2 mx-2 w-1/2 gap-2">
+            <input
+              type="text"
+              className="block w-1/2 mt-2 px-3 py-2 border-b-2 border-0
+              focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
+              placeholder="Nombre:"
+            />
+            <input
+              type="email"
+              className="block w-1/2 mt-2 px-3 py-2 border-b-2 border-0
+              focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
+              placeholder="Email"
+            />
+          </div>
+          <div className="mb-2 w-full mx-5">
+            <textarea
+              className="border-4 border-[var(--secondary-color)] rounded-lg p-2 w-2/5 text-black"
+              placeholder="Tu mensaje:"
+              rows="4"
+            />
+          </div>
+          <div className="flex justify-start my-5">
+            <button className="bg-[var(--secondary-color)] text-white rounded-full p-2 w-40 hover:bg-[var(--primary-color)] focus:outline-none focus:ring focus:ring-purple-300">
+              Enviar
+            </button>
+          </div>
         </div>
-        <div className="mb-2 w-full mx-5">
-          <textarea
-            className="border-4 border-purple-800 rounded-lg p-2 w-2/5 text-black"
-            placeholder="Tu mensaje:"
-            rows="4"
+        <div className="">
+          <img
+            className="fondo absolute bottom-0 right-0 z-40"
+            src={Fondo}
+            alt="Fondo"
           />
-        </div>
-        <div className="flex justify-start my-5">
-          <button className="bg-purple-600 text-white rounded-full p-2 w-40 hover:bg-purple-700 focus:outline-none focus:ring focus:ring-purple-300">
-            Enviar
-          </button>
         </div>
       </div>
-      {/* Imagen pegada en la esquina inferior derecha sobre el Footer */}
-      <div className="relative">
-        <img
-          className="fondo absolute bottom-0 right-0 z-40"
-          src={Fondo}
-          alt="Fondo"
-        />
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
