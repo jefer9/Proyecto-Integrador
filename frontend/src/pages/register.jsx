@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Register() {
 
-  const goHome = useNavigate()
+  const goLogin = useNavigate()
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -60,7 +60,7 @@ function Register() {
 
       if (response.ok) {
         alert(data.message);
-        goHome("/")
+        goLogin("/SignIn")
       } else {
         alert(data.detail);
       }

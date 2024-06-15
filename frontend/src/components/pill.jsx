@@ -22,6 +22,7 @@ function Pill() {
 
   const handleLogout = () => {
     localStorage.removeItem("usuario");
+    setUser(null)
     goHome("/");
   };
 

@@ -105,7 +105,6 @@ def buscar_libro(id: int = Path(..., ge=1, le=2000)) -> Libro:
     else:
         raise HTTPException(status_code=404, detail="Libro no encontrado")
 
-
 #metodo para crear libro
 @app.post('/libros', tags=['libros'], response_model=dict, status_code=201)
 def crear_libro(libro: Libro) -> dict:
@@ -232,8 +231,8 @@ def reservar_libro(
 
     return {"message": "Libro reservado exitosamente"}
 
-
-@app.post('/estudiantes', tags=['estudiantes'], response_model=dict, status_code=200)
+#registro de estudiantes
+@app.post('/register_estudiantes', tags=['estudiantes'], response_model=dict, status_code=200)
 def registro_estudiante(estudiante: Estudiante) -> dict:
     try:
         db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
@@ -254,7 +253,7 @@ def registro_estudiante(estudiante: Estudiante) -> dict:
 
 
 class Usuario(BaseModel):
-    id: int
+    email: str
     contrasena: str
 
 
@@ -265,42 +264,63 @@ def login(usuario: Usuario):
         db.connect()
 
         query = (
-            "SELECT 'estudiante' AS tipo, id_estudiante AS id, contrasena_estudiante AS contrasena "
-            "FROM estudiantes WHERE id_estudiante = %s AND contrasena_estudiante = %s "
+            "SELECT 'estudiante' AS tipo, email_estudiante AS email, contrasena_estudiante AS contrasena, nombre_estudiante AS nombre "
+            "FROM estudiantes WHERE email_estudiante = %s AND contrasena_estudiante = %s "
             "UNION ALL "
-            "SELECT 'docente' AS tipo, id_docente AS id, contrasena_docente AS contrasena "
-            "FROM docentes WHERE id_docente = %s AND contrasena_docente = %s "
+            "SELECT 'docente' AS tipo, email_docente AS email, contrasena_docente AS contrasena, nombre_docente AS nombre "
+            "FROM docentes WHERE email_docente = %s AND contrasena_docente = %s "
             "UNION ALL "
-            "SELECT 'bibliotecario' AS tipo, id_bibliotecario AS id, contrasena_bibliotecario AS contrasena "
-            "FROM bibliotecario WHERE id_bibliotecario = %s AND contrasena_bibliotecario = %s"
+            "SELECT 'bibliotecario' AS tipo, email_bibliotecario AS email, contrasena_bibliotecario AS contrasena, nombre_bibliotecario AS nombre "
+            "FROM bibliotecario WHERE email_bibliotecario = %s AND contrasena_bibliotecario = %s"
         )
 
-        values = (usuario.id, usuario.contrasena, usuario.id, usuario.contrasena, usuario.id, usuario.contrasena)
+        values = (usuario.email, usuario.contrasena, usuario.email, usuario.contrasena, usuario.email, usuario.contrasena)
         result = db.execute_query(query, values)
 
         if result:
             for row in result:
+                row = result[0]
                 tipo = row[0]
-                id_usuario = row[1]
+                email_usuario = row[1]
                 contrasena_usuario = row[2]
+                nombre_usuario = row[3]
 
-                if tipo == 'bibliotecario' and id_usuario == 123 and contrasena_usuario == '123':
-                    return {"message": "credenciales correctas bienvenido"}
+                if tipo == 'bibliotecario' and email_usuario == "b" and contrasena_usuario == '123':
+                    return {"message": "credenciales correctas bienvenido", "usuario": {"tipo": tipo, "email": email_usuario, "nombre": nombre_usuario}}
 
-                elif tipo == 'docente' and id_usuario == usuario.id and contrasena_usuario == usuario.contrasena:
-                    return {"message": "credenciales correctas bienvenido"}
-
-                elif tipo == 'estudiante' and id_usuario == usuario.id and contrasena_usuario == usuario.contrasena:
-                    return {"message": "credenciales correctas bienvenido"}
+                return {"message": "credenciales correctas bienvenido", "usuario": {"tipo": tipo, "email": email_usuario, "nombre": nombre_usuario}}
         else:
             return {"message": "usuario y/o contraseña incorrecta"}
 
     except Exception as e:
         db.disconnect()
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail="error en la conexion")
     finally:
         db.disconnect()
 
+#metodo para obtener todos los estudiantes de la bd
+@app.get('/estudiantes', tags=['estudiantes'], response_model=List[Estudiante], status_code=200)
+def get_estudiantes():
+    db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
+    db.connect()
+
+    query = "SELECT * FROM estudiantes"
+    result = db.execute_query(query)
+
+    db.disconnect()
+    estudiantes = []
+    for row in result:
+        estudiante = Estudiante(
+            id=row[0],
+            nombre=row[1],
+            apellido=row[2],
+            telefono=row[3],
+            email=row[4],
+            contrasena=row[5]
+        )
+        estudiantes.append(estudiante)
+
+    return estudiantes
 
 @app.get('/pedidos', tags=['pedidos'], response_model=List[Pedido], status_code=200)
 def visualizar_pedidos() -> List[Pedido]:
@@ -327,7 +347,7 @@ def visualizar_pedidos() -> List[Pedido]:
         db.disconnect()
 
 
-@app.get('/pedidos/{id}', tags=['pedidos'], response_model=Pedido, status_code=200)
+@app.get('/pedido/{id}', tags=['pedidos'], response_model=Pedido, status_code=200)
 def visualizar_pedido(id: int) -> Pedido:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
     try:
