@@ -4,11 +4,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, datetime_parse
 from typing import Optional, List
-from ConexionDB import ConexionBD
+from config.ConexionDB import ConexionBD
 from datetime import datetime, date
 
 app = FastAPI()
-app.title = "Atena"
+app.title = "Athena"
 
 app.add_middleware(
     CORSMiddleware,
@@ -256,7 +256,7 @@ class Usuario(BaseModel):
     email: str
     contrasena: str
 
-
+# funcion para logear al usuario
 @app.post('/login', tags=['login'])
 def login(usuario: Usuario):
     try:
@@ -322,6 +322,7 @@ def get_estudiantes():
 
     return estudiantes
 
+# funcion para visualizar todos los Pedidos
 @app.get('/pedidos', tags=['pedidos'], response_model=List[Pedido], status_code=200)
 def visualizar_pedidos() -> List[Pedido]:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
@@ -346,7 +347,7 @@ def visualizar_pedidos() -> List[Pedido]:
     finally:
         db.disconnect()
 
-
+# buscar pedido por id
 @app.get('/pedido/{id}', tags=['pedidos'], response_model=Pedido, status_code=200)
 def visualizar_pedido(id: int) -> Pedido:
     db = ConexionBD(host="localhost", port="3306", user="root", passwd="", database="biblioteca")
