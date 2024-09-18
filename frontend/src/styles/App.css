@@ -8,8 +8,8 @@
 }
 
 .fondo-libros {
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
 }
 
 .gafas-img {
@@ -34,8 +34,7 @@
 }
 
 @media (max-width: 768px) {
-  .fondo-libros,
-  .gafas-img {
+  .fondo-libros{
     display: none;
   }
 }
