@@ -50,7 +50,7 @@ function Book() {
               <img
                 src={imageUrl}
                 alt={libro.titulo}
-                className="mt-4 h-[400px] w-[300px]"
+                className="mt-4 h-[200px] w-[300px]"
               />
             </div>
             <div className="mx-auto w-2/3">

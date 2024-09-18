@@ -10,7 +10,7 @@ function LibroPortada({ libro }) {
         <img
           src={imageUrl}
           alt={libro.titulo}
-          className=" hover:scale-105 transition h-[300px] w-[200px]"
+          className=" hover:scale-105 transition h-[250px] w-[200px]"
         />
       </Link>
       <Link to={"/Book/" + libro.id}>

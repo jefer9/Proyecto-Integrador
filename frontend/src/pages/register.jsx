@@ -71,12 +71,12 @@ function Register() {
 
   return (
     <div className="main-content">
-      <div className=" w-full flex items-center justify-between h-32">
+      <div className=" w-full flex items-center justify-between md:h-32 mt-4 sm:mt-0">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />
         <Pill />
       </div>
-      <div className=" w-2/3 sm:w-1/2 mx-auto mt-4">
+      <div className=" w-2/3 sm:w-1/2 mx-auto mt-8">
         <p className=" text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--secondary-color)]">
           REGISTRARSE
         </p>

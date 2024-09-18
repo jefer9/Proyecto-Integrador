@@ -53,7 +53,7 @@ const Contacto = () => {
           </div>
           <div className="relative w-full h-full lg:pl-10">
             <img
-              className=" hidden md:block absolute w-[362px] h-[350px] lg:w-[480px] lg:h-fit right-0 -bottom-10 lg:-bottom-[100px]"
+              className=" hidden md:block absolute w-[362px] h-[350px] lg:w-[480px] lg:h-fit right-0 -bottom-[25%] lg:-bottom-[100px]"
               src={Fondo}
               alt="Fondo"
             />
