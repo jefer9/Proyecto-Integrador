@@ -45,9 +45,6 @@ function SignIn() {
         if (data.usuario) {
           localStorage.setItem("usuario", JSON.stringify(data.usuario));
           goHome("/");
-        } else {
-          console.error("Usuario no encontrado en la respuesta");
-          alert("Hubo un error al iniciar sesión. Inténtelo de nuevo.");
         }
       } else {
         alert(data.detail);
@@ -59,24 +56,26 @@ function SignIn() {
   };
 
   return (
+    <>
+    
     <div className="main-content">
       <div className=" w-full flex items-center justify-between mt-4 md:h-32 sm:mt-0 ">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />
         <Pill />
       </div>
-      <div className="w-2/3 mx-auto mt-5 min-h-full">
-        <div className="grid md:grid-cols-2 gap-x-5">
-          <img src={signIn} alt="" />
+      <div className="w-2/3 mx-auto mt-8">
+        <div className="grid sm:grid-cols-2 gap-x-5 md:gap-x-10">
+          <img src={signIn} alt="" className=" h-[280px] md:w-[400px] md:h-[330px] hidden sm:block"/>
           <div className="flex flex-col items-center justify-around ">
-            <p className="text-[var(--secondary-color)] text-5xl font-semibold">
+            <p className="text-[var(--secondary-color)] text-start text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
               INGRESAR
             </p>
             <form onSubmit={handleSubmit} className="w-full">
               <div>
                 <label
                   htmlFor="correo"
-                  className="text-[var(--secondary-color)]"
+                  className="text-[var(--secondary-color)] font-semibold"
                 >
                   Correo:
                 </label>
@@ -86,31 +85,31 @@ function SignIn() {
                   id="correo"
                   value={formdata.correo}
                   onChange={handleChange}
-                  className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+                  className="block w-full mt-2 px-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400 mb-4"
                 />
               </div>
               <div>
                 <label
                   htmlFor="contrasena"
-                  className="text-[var(--secondary-color)] "
+                  className="text-[var(--secondary-color)] font-semibold"
                 >
                   Contraseña:
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="contrasena"
                   id="contrasena"
                   value={formdata.contrasena}
                   onChange={handleChange}
-                  className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+                  className="block w-full mt-2 px-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
                 />
               </div>
               <div className="text-center">
                 <button
                   type="submit"
-                  className=" my-6  bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg"
+                  className=" my-8 md:my-6  bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg"
                 >
                   Ingresar
                 </button>
@@ -120,7 +119,7 @@ function SignIn() {
               <p>¿No tienes una cuenta?</p>
               <Link
                 to="/Register"
-                className="text-[var(--primary-color)] text-lg font-semibold"
+                className="text-[var(--primary-color)] text-lg font-semibold italic"
               >
                 Registrate aqui
               </Link>
@@ -128,8 +127,9 @@ function SignIn() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
+      <Footer />
+  </>
   );
 }
 

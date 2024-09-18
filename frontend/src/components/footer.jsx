@@ -6,7 +6,7 @@ import "../styles/App.css"
 
 function Footer() {
   return (
-    <footer className=" w-full relative bottom-0 flex justify-center gap-5 footer h-20 items-center mt-auto">
+    <footer className=" w-full flex justify-center gap-5 footer h-20 items-center md:mt-5">
       <span>
         <img src={iconTwitter} alt="" />
       </span>
