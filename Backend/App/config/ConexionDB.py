@@ -1,12 +1,12 @@
 import mysql.connector
 
 class ConexionBD:
-    def __init__(self, host, port, user, passwd, database):
-        self.host = host
-        self.port = port
-        self.user = user
-        self.passwd = passwd
-        self.database = database
+    def __init__(self):
+        self.host = "localhost"
+        self.port = "3306"
+        self.user = "root"
+        self.passwd = ""
+        self.database = "biblioteca"
         self.connection = None
 
     def connect(self):
