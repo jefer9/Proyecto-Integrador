@@ -1,67 +1,67 @@
 /* hecho por jaider*/
-import React from "react";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
-import "../styles/contacto.css";
 import Pill from "../components/pill";
 import Fondo from "../../public/FONDOS2/Fondos2_Mesa de trabajo 1 copia 3.svg";
 
 const Contacto = () => {
   return (
-    <div>
-      <div className=" w-full flex items-center justify-between h-32">
-        {/* barra de navegacion y componente para el login y el registro */}
-        <Nav />
-        <Pill />
-      </div>
-      <div className="">
-        <div className=" w-1/2 mr-auto pr-4 pl-24  flex flex-col justify-start items-start">
-          <h1 className="text-[var(--secondary-color)] text-[72px] font-semibold mt-8 uppercase">
-            Contacto
-          </h1>
-          <span className="text-3xl font-bold text-[var(--secondary-color)]">
-            - - - - - - - - - - -
-          </span>
-          <p className=" font-medium pr-48 w-3/4">
-            Para nosotros es muy importante saber tus necesidades
-          </p>
-          <div className="flex items-center mb-2 mx-2 w-1/2 gap-2">
-            <input
-              type="text"
-              className="block w-1/2 mt-2 px-3 py-2 border-b-2 border-0
+    <>
+      <div className="main-content">
+        <div className=" w-full flex items-center justify-between md:h-32 mt-4 sm:mt-0">
+          {/* barra de navegacion y componente para el login y el registro */}
+          <Nav />
+          <Pill />
+        </div>
+        <div className=" grid grid-cols-1 md:grid-cols-2">
+          <div className=" w-3/4 mx-auto flex flex-col text-center items-center">
+            <h1 className="text-[var(--secondary-color)] text-[42px] sm:text-[48px] lg:text-[56px] font-semibold mt-4 uppercase h-10 sm:h-16 lg:h-20">
+              Contacto
+            </h1>
+            <span className="text-3xl font-bold text-[var(--secondary-color)]">
+              - - - - - - - - - - -
+            </span>
+            <p className=" font-medium text-gray-600 w-3/4 md:w-full">
+              Para nosotros es muy importante saber tus necesidades
+            </p>
+            <div className="flex flex-col md:flex-row w-full items-center gap-2">
+              <input
+                type="text"
+                className="block mt-2 px-3 py-2 border-b-2 border-0 md:w-full
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
-              placeholder="Nombre:"
-            />
-            <input
-              type="email"
-              className="block w-1/2 mt-2 px-3 py-2 border-b-2 border-0
+                placeholder="Nombre:"
+              />
+              <input
+                type="email"
+                className="block mt-2 px-3 py-2 border-b-2 border-0 md:w-full
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
-              placeholder="Email"
-            />
+                placeholder="Email"
+              />
+            </div>
+            <div className="mb-2 w-full mx-5">
+              <textarea
+                className="border-2 focus:outline-none focus:border-[var(--secondary-color)] md:w-4/5 w-3/4 h-24 md:h-20 rounded-md p-2 mt-6 text-gray-500 "
+                placeholder="Escribenos:"
+                rows="4"
+              />
+            </div>
+            <div className="flex justify-start my-5 md:my-2">
+              <button className="bg-[var(--secondary-color)] text-white rounded-full p-2 w-40 hover:bg-[var(--primary-color)]">
+                Enviar
+              </button>
+            </div>
           </div>
-          <div className="mb-2 w-full mx-5">
-            <textarea
-              className="border-4 border-[var(--secondary-color)] rounded-lg p-2 w-2/5 text-black"
-              placeholder="Tu mensaje:"
-              rows="4"
+          <div className="relative w-full h-full lg:pl-10">
+            <img
+              className=" hidden md:block absolute w-[362px] h-[350px] lg:w-[480px] lg:h-fit right-0 -bottom-10 lg:-bottom-[100px]"
+              src={Fondo}
+              alt="Fondo"
             />
-          </div>
-          <div className="flex justify-start my-5">
-            <button className="bg-[var(--secondary-color)] text-white rounded-full p-2 w-40 hover:bg-[var(--primary-color)] focus:outline-none focus:ring focus:ring-purple-300">
-              Enviar
-            </button>
           </div>
         </div>
-        <div className="">
-          <img
-            className="fondo absolute bottom-0 right-0 z-40"
-            src={Fondo}
-            alt="Fondo"
-          />
-        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 
