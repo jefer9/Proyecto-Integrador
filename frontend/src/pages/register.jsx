@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
-
-  const goLogin = useNavigate()
+  const goLogin = useNavigate();
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -30,11 +29,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.terminos) {
-      alert("Debe aceptar los términos y condiciones.");
-      return;
-    }
-
     const estudiante = {
       id: parseInt(formData.cedula),
       nombre: formData.nombre,
@@ -44,29 +38,34 @@ function Register() {
       contrasena: formData.contrasena,
     };
 
-    try {
-      const response = await fetch(
-        "http://localhost:8000/register_estudiantes",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(estudiante),
+    if (!formData.terminos) {
+      alert("Debe aceptar los términos y condiciones.");
+      return;
+    } else {
+      try {
+        const response = await fetch(
+          "http://localhost:8000/register_estudiantes",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(estudiante),
+          }
+        );
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert(data.message);
+          goLogin("/SignIn");
+        } else {
+          alert(data.detail);
         }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert(data.message);
-        goLogin("/SignIn")
-      } else {
-        alert(data.detail);
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Hubo un error al registrar el estudiante.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Hubo un error al registrar el estudiante.");
     }
   };
 
@@ -77,16 +76,16 @@ function Register() {
         <Nav />
         <Pill />
       </div>
-      <div className=" w-1/2 mx-auto mt-4">
-        <p className=" text-center text-[68px] font-semibold text-[var(--secondary-color)]">
+      <div className=" w-2/3 sm:w-1/2 mx-auto mt-4">
+        <p className=" text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--secondary-color)]">
           REGISTRARSE
         </p>
         <form
           onSubmit={handleSubmit}
-          className=" w-full grid grid-cols-1 md:grid-cols-2 my-5 gap-y-5 gap-x-10"
+          className=" w-full grid grid-cols-1 md:grid-cols-2 my-5 gap-y-3 gap-x-12"
         >
           <div>
-            <label htmlFor="nombre" className="text-[var(--secondary-color)]">
+            <label htmlFor="nombre" className="text-[var(--secondary-color)] font-semibold">
               Nombre:
             </label>
             <input
@@ -96,12 +95,12 @@ function Register() {
               value={formData.nombre}
               onChange={handleChange}
               required
-              className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+              className="block w-full mt-1 px-2 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
           </div>
           <div>
-            <label htmlFor="apellido" className="text-[var(--secondary-color)]">
+            <label htmlFor="apellido" className="text-[var(--secondary-color)] font-semibold">
               Apellido:
             </label>
             <input
@@ -111,12 +110,12 @@ function Register() {
               required
               value={formData.apellido}
               onChange={handleChange}
-              className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+              className="block w-full mt-1 px-2 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
           </div>
           <div>
-            <label htmlFor="correo" className="text-[var(--secondary-color)]">
+            <label htmlFor="correo" className="text-[var(--secondary-color)] font-semibold">
               Correo:
             </label>
             <input
@@ -126,12 +125,12 @@ function Register() {
               required
               value={formData.correo}
               onChange={handleChange}
-              className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+              className="block w-full mt-1 px-2 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
           </div>
           <div>
-            <label htmlFor="cedula" className="text-[var(--secondary-color)]">
+            <label htmlFor="cedula" className="text-[var(--secondary-color)] font-semibold">
               Cedula:
             </label>
             <input
@@ -141,12 +140,12 @@ function Register() {
               required
               value={formData.cedula}
               onChange={handleChange}
-              className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+              className="block w-full mt-1 px-2 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
           </div>
           <div>
-            <label htmlFor="telefono" className="text-[var(--secondary-color)]">
+            <label htmlFor="telefono" className="text-[var(--secondary-color)] font-semibold">
               Telefono:
             </label>
             <input
@@ -156,14 +155,14 @@ function Register() {
               required
               value={formData.telefono}
               onChange={handleChange}
-              className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+              className="block w-full mt-1 px-2 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
           </div>
           <div>
             <label
               htmlFor="contrasena"
-              className="text-[var(--secondary-color)]"
+              className="text-[var(--secondary-color)] font-semibold"
             >
               Contraseña:
             </label>
@@ -172,7 +171,7 @@ function Register() {
               name="contrasena"
               id="contrasena"
               required
-              className="block w-full mt-2 px-3 py-2 border-b-2 border-0
+              className="block w-full mt-1 px-2 py-2 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
               value={formData.contrasena}
               onChange={handleChange}
@@ -208,8 +207,8 @@ function Register() {
             >
               Aceptar terminos y condiciones
             </label>
-          </div>  
-          <div className="text-center">
+          </div>
+          <div className="text-center md:col-span-2 mt-2">
             <button
               type="submit"
               className=" mb-6 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg"
