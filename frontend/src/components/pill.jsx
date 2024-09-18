@@ -28,8 +28,8 @@ function Pill() {
 
   return (
     <>
-      <div className="bg-[var(--secondary-color)] h-14 rounded-s-full" >
-        <div className="flex pr-6 pl-2 items-center justify-center h-full text-white font-roboto cursor-pointer" onClick={handleMenuToggle}>
+      <div className="bg-[var(--secondary-color)] h-14 rounded-s-full min-w-[230px] xsm:w-[300px] sm:w-[250px]" >
+        <div className="flex pr-1 xsm:pr-2 pl-2 items-center justify-center h-full text-white font-roboto cursor-pointer" onClick={handleMenuToggle}>
           {user ? (
             <div className="flex items-center">
               <span className="mx-12 uppercase">{user.nombre}</span>

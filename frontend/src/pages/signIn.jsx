@@ -60,7 +60,7 @@ function SignIn() {
 
   return (
     <div className="main-content">
-      <div className=" w-full flex items-center justify-between h-32">
+      <div className=" w-full flex items-center justify-between mt-4 md:h-32 sm:mt-0 ">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />
         <Pill />
