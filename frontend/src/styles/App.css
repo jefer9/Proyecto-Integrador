@@ -1,9 +1,7 @@
 .main-content {
   display: block;
-  height: 70%;
+  height: 100vh;
 }
-
-
 
 .footer {
   background: url(../../FONDOS2/fondo-footer.webp) no-repeat;
@@ -23,30 +21,6 @@
   width: 950px;
 }
 
-/* Estilos para los elementos link de la barra de navegacion */
-
-.link-underline {
-  position: relative;
-  display: inline-block;
-}
-
-.link-underline::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  background-color: rgb(73, 68, 150); /* Cambia esto al color que prefieras */
-  transition: width 0.3s ease, left 0.3s ease;
-}
-
-.link-underline:hover::after {
-  width: 100%;
-  left: 0;
-}
-
-/* ----------------------------- */
 
 @media (max-width: 1024px) {
   .fondo-libros {
