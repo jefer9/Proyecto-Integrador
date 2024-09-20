@@ -8,14 +8,14 @@ function Register() {
   const goLogin = useNavigate();
 
   const [formData, setFormData] = useState({
+    cedula: "",
     nombre: "",
     apellido: "",
-    correo: "",
-    cedula: "",
-    tipoUsuario: "estudiante",
-    terminos: false,
-    contrasena: "",
     telefono: "",
+    correo: "",
+    contrasena: "",
+    tipo: "",
+    terminos: false,
   });
 
   const handleChange = (e) => {
@@ -36,6 +36,7 @@ function Register() {
       telefono: formData.telefono,
       email: formData.correo,
       contrasena: formData.contrasena,
+      tipo: formData.tipo,
     };
 
     if (!formData.terminos) {
@@ -43,8 +44,9 @@ function Register() {
       return;
     } else {
       try {
+        console.log(estudiante);
         const response = await fetch(
-          "http://localhost:8000/register_estudiantes",
+          "http://localhost:8000/usuarios/registro_usuario",
           {
             method: "POST",
             headers: {
@@ -64,7 +66,7 @@ function Register() {
         }
       } catch (error) {
         console.error("Error:", error);
-        alert("Hubo un error al registrar el estudiante.");
+        alert("Hubo un error al registrar al usuario.");
       }
     }
   };
@@ -178,19 +180,22 @@ function Register() {
             />
           </div>
           <div>
-            <label htmlFor="tipo-usuario" className="mr-3">
-              Estudiante:
+            <label htmlFor="tipo" className="mr-3">
+              Tipo de usuario:
             </label>
-            <input
-              type="radio"
-              name="tipo-usuario"
-              id="estudiante"
+            <select name="tipo"
+              id="tipo"
               className=""
+              value={formData.tipo}
               required
-              value="estudiante"
-              checked={formData.tipoUsuario === "estudiante"}
-              onChange={handleChange}
-            />
+              onChange={handleChange}>
+                <option value={""} className="">Selecciona una opcion:</option>
+                <option value={"estudiante"}>Estudiante</option>
+                <option value={"profesor"}>Profesor</option>
+                <option value={"administrador"}>Administrador</option>
+
+            </select>
+            
           </div>
           <div>
             <input
