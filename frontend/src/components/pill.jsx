@@ -7,7 +7,7 @@ function Pill() {
 
   useEffect(() => {
     // Obtener datos del usuario desde localStorage
-    const loggedUser = localStorage.getItem("usuario");
+    const loggedUser = localStorage.getItem("user");
     if (loggedUser) {
       setUser(JSON.parse(loggedUser));
     }
@@ -21,7 +21,8 @@ function Pill() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("usuario");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     setUser(null)
     goHome("/");
   };
@@ -32,7 +33,7 @@ function Pill() {
         <div className="flex pr-1 xsm:pr-2 pl-2 items-center justify-center h-full text-white font-roboto cursor-pointer" onClick={handleMenuToggle}>
           {user ? (
             <div className="flex items-center">
-              <span className="mx-12 uppercase">{user.nombre}</span>
+              <span className="mx-12 uppercase">{user.nombre_usuario}</span>
               {menuOpen && (
                 <div className="absolute right-1 mt-[105px] w-40 bg-[var(--secondary-color)] text-white shadow-lg z-10">
                   {/* <Link

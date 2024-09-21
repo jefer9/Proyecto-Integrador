@@ -24,32 +24,44 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const usuario = {
-      email: formdata.correo,
-      contrasena: formdata.contrasena,
-    };
+    const formData = new FormData();
+    formData.append("username", formdata.correo)
+    formData.append("password", formdata.contrasena);
 
-    if (!formdata.correo && !formdata.contrasena) {
+    if (!formdata.correo || !formdata.contrasena) {
       alert("Todos los campos son obligatorios.");
       return;
     } else {
       try {
-        const response = await fetch("http://localhost:8000/login", {
+        const response = await fetch("http://localhost:8000/usuarios/login", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(usuario),
+          body: formData
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          alert(data.message);
-          if (data.usuario) {
-            localStorage.setItem("usuario", JSON.stringify(data.usuario));
+          console.log(data);
+          localStorage.setItem("token", data.access_token);
+
+          const userResponse = await fetch("http://localhost:8000/usuarios/me",{
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${data.access_token}`
+            }
+          })
+          
+          const userData = await userResponse.json();
+
+          if(userResponse.ok){
+            console.log(userData);
+            localStorage.setItem("user", JSON.stringify(userData))
+            alert("login exitoso")
             goHome("/");
+          } else{
+            alert("Error al obtener datos del usuario")
           }
+          
         } else {
           alert(data.detail);
         }
