@@ -8,8 +8,14 @@ import SignIn from "./pages/signIn";
 import Contacto from "./pages/contact";
 import Profile from "./pages/profile";
 import Admin from "./pages/admin";
+import ProtectedRoute from "./components/protectedRoute";
 
 function App() {
+
+  const stored_users = JSON.parse(localStorage.getItem("user"))
+  const isAdmin = stored_users && stored_users.tipo_usuario === "administrador"
+  console.log(isAdmin);
+
   return (
     <>
         <ScrollToTop/>
@@ -21,7 +27,14 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/Profile" element={<Profile />} />
-          <Route path="/Admin" element={<Admin />} />
+          <Route
+          path="/Admin"
+          element={
+            <ProtectedRoute isAllowed={isAdmin}>
+              <Admin />
+            </ProtectedRoute>
+          }
+        />
         </Routes>
     </>
   );
