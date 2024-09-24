@@ -9,6 +9,7 @@ function Book() {
   const [libro, setLibro] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:8000/libros/${id}`)
@@ -29,6 +30,15 @@ function Book() {
       });
   }, [id]);
 
+  useEffect(() => {
+    const stored_user = JSON.parse(localStorage.getItem("user"));
+    if (stored_user && stored_user.tipo_usuario === "administrador") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, []);
+
   if (loading) {
     return <p>Cargando...</p>;
   }
@@ -37,7 +47,7 @@ function Book() {
 
   return (
     <div className="main-content">
-      <div className=" w-full flex items-center justify-between h-32">
+      <div className=" w-full flex items-center justify-between md:h-32 mt-4 md:mt-0">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />
         <Pill />
@@ -56,7 +66,9 @@ function Book() {
               <h1 className="text-[28px] md:text-[36px] font-bold text-[var(--secondary-color)] text-start mb-4 md:mb-6">
                 {libro.titulo}
               </h1>
-              <p className="text-lg font-light text-gray-500/70">{libro.sinopsis}</p>
+              <p className="text-lg font-light text-gray-500/70">
+                {libro.sinopsis}
+              </p>
               <p className="mt-2 text-[var(--primary-color)]">
                 <strong>Autor: </strong>
                 {libro.autor}
@@ -69,9 +81,16 @@ function Book() {
                 <strong>Género: </strong>
                 {libro.genero}
               </p>
-              <button className="mt-5 md:mt-10 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg w-full">
-                Reservar
-              </button>
+              {isAdmin === true ? (
+                <div className="flex justify-around mt-5 md:mt-10  text-white">
+                  <button className=" bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] py-3 px-5 rounded-lg w-2/5">Editar</button>
+                  <button className=" bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] py-3 px-5 rounded-lg w-2/5">Eliminar</button>
+                </div>
+              ) : (
+                <button className="mt-5 md:mt-10 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg w-full">
+                  Reservar
+                </button>
+              )}
             </div>
           </div>
         </div>
