@@ -12,6 +12,7 @@ function SignIn() {
   });
 
   const goHome = useNavigate();
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +26,7 @@ function SignIn() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("username", formdata.correo)
+    formData.append("username", formdata.correo);
     formData.append("password", formdata.contrasena);
 
     if (!formdata.correo || !formdata.contrasena) {
@@ -35,7 +36,7 @@ function SignIn() {
       try {
         const response = await fetch("http://localhost:8000/usuarios/login", {
           method: "POST",
-          body: formData
+          body: formData,
         });
 
         const data = await response.json();
@@ -44,24 +45,30 @@ function SignIn() {
           console.log(data);
           localStorage.setItem("token", data.access_token);
 
-          const userResponse = await fetch("http://localhost:8000/usuarios/me",{
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${data.access_token}`
+          const userResponse = await fetch(
+            "http://localhost:8000/usuarios/me",
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${data.access_token}`,
+              },
             }
-          })
-          
+          );
+
           const userData = await userResponse.json();
 
-          if(userResponse.ok){
+          if (userResponse.ok) {
             console.log(userData);
-            localStorage.setItem("user", JSON.stringify(userData))
-            alert("login exitoso")
-            goHome("/");
-          } else{
-            alert("Error al obtener datos del usuario")
+            localStorage.setItem("user", JSON.stringify(userData));
+            if(userData.tipo_usuario === "administrador") {
+              goHome("/Admin")
+            } else{
+              goHome("/");
+            }
+            alert("login exitoso");
+          } else {
+            alert("Error al obtener datos del usuario");
           }
-          
         } else {
           alert(data.detail);
         }
@@ -75,7 +82,7 @@ function SignIn() {
   return (
     <>
       <div className="main-content">
-        <div className=" w-full flex items-center justify-between mt-4 md:h-32 sm:mt-0 ">
+        <div className=" w-full flex items-center justify-between mt-4 md:h-32 md:mt-0">
           {/* barra de navegacion y componente para el login y el registro */}
           <Nav />
           <Pill />
