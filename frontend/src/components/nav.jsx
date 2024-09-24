@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import logoAthena from "../assets/logo-athena.svg";
 import menu from "../assets/icons/menu.svg";
 import "../styles/App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -15,24 +16,34 @@ function Nav() {
     setIsOpen(false);
   };
 
+  // Obtener el tipo de usuario actual
+  useEffect(() => {
+    const stored_user = JSON.parse(localStorage.getItem("user"));
+    if (stored_user && stored_user.tipo_usuario === "administrador") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, []);
+
   return (
     <>
-      <nav className=" flex justify-evenly w-2/4 font-roboto ml-12 h-full items-center sm:gap-2">
-        <div className="bg-white sm:bg-[var(--secondary-color)] w-24 h-full flex items-center sm:justify-center">
+      <nav className=" flex justify-evenly w-2/4 lg:w-2/3 font-roboto ml-12 h-full items-center sm:gap-4">
+        <div className="bg-white md:bg-[var(--secondary-color)] w-24 h-full flex items-center sm:justify-center">
           <img
             src={logoAthena}
             alt="logo-athena"
-            className="max-w-16 max-h-16  md:w-20 md:h-20 my-4 md:my-2 hidden sm:block"
+            className="max-w-16 max-h-16  md:w-20 md:h-20 my-4 md:my-2 mx-3 hidden md:block"
           />
           <img
             src={menu}
             alt=""
-            className=" sm:hidden cursor-pointer z-40"
+            className=" md:hidden cursor-pointer z-40"
             onClick={handleClick}
           />
         </div>
         {/* menu de escritorio */}
-        <ul className="sm:flex gap-8 pt-2 text-[var(--secondary-color)] hidden">
+        <ul className="md:flex gap-8 pt-2 text-[var(--secondary-color)] hidden">
           <li>
             <Link to="/" className="link-underline">
               INICIO
@@ -48,6 +59,13 @@ function Nav() {
               CONTACTO
             </Link>
           </li>
+          {isAdmin && (
+            <li>
+              <Link to="/Admin" className="link-underline">
+                ADMINISTRACIÓN
+              </Link>
+            </li>
+          )}
         </ul>
 
         {/* menu mobile */}
@@ -82,6 +100,13 @@ function Nav() {
                 CONTACTO
               </Link>
             </li>
+            {isAdmin && (
+              <li>
+                <Link to="/Admin" className="link-underline">
+                  ADMINISTRACIÓN
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
