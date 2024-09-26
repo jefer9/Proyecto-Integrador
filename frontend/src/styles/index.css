@@ -15,6 +15,7 @@
   --color-parrafo: rgb(234, 233, 245);
   --hover-color: rgb(65, 60, 140);
   --secondary-color-transparent: rgba(73, 68, 150, 0.95);
+  --bg-transparent: rgba(0, 0, 0, 0.7)
 }
 
 html,

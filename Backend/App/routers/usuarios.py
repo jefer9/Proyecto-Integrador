@@ -59,21 +59,23 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
         db = ConexionBD()
         db.connect()
         #creamos la query
-        query = "SELECT nombre_usuario, tipo, email, contrasena from usuarios WHERE email = ?"
+        query = "SELECT nombre_usuario,apellido_usuario, tipo, email, contrasena, telefono from usuarios WHERE email = ?"
         #ejecutamos la query y obtenemos el resultado
         result = db.execute_query(query, (form_data.username))
         #si el resultado es correcto guardamos los datos en una lista
         if result:
-            nommbre_usuario,tipo, email, hashed_contrasena = result[0]
+            nommbre_usuario,apellido_usuario,tipo, email, hashed_contrasena, telefono = result[0]
             #llamamos la funciona para verificar la contraseña 
             if not verify_password(form_data.password, hashed_contrasena):
                 raise HTTPException(status_code=400, detail="Credenciales incorrectas")
             
-            #si la verificacion es correcta creamos un token de acceso y pasamos el email y el tipo de usuario
+            #si la verificacion es correcta creamos un token de acceso y pasamos el email, el tipo de usuario, el telefono y el nombre de usuario
             acces_token = create_access_token(data={
                 "sub": email, 
+                "user_name": nommbre_usuario,
+                "last_name": apellido_usuario,
                 "tipo_usuario": tipo, 
-                "user_name": nommbre_usuario
+                "telefone": telefono,
                 })
             #retornamos el token de acceso y el tipo de token
             return {"access_token": acces_token, "token_type": "bearer"}
@@ -87,11 +89,13 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 #obtener la informacion del usuario autenticado
 @router.get("/me")
 async def get_user(current_user: dict = Depends(get_current_active_user)):
-    #esta funcion depende si el token de acceso es correcto es traera la informacion del usuario verificado
+    #esta funcion depende si el token de acceso es correcto, traera la informacion del usuario verificado
     return {
         "email": current_user.get("sub"),
-        "tipo_usuario": current_user.get("tipo_usuario"),
         "nombre_usuario": current_user.get("user_name"),
+        "apellido_usuario": current_user.get("last_name"),
+        "tipo_usuario": current_user.get("tipo_usuario"),
+        "telefono": current_user.get("telefone")
     }
 
 

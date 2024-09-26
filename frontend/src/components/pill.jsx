@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 function Pill() {
   const [user, setUser] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     // Obtener datos del usuario desde localStorage
@@ -13,7 +14,6 @@ function Pill() {
     }
   }, []);
 
-  const [menuOpen, setMenuOpen] = useState(false);
   const goHome = useNavigate();
 
   const handleMenuToggle = () => {
@@ -23,14 +23,17 @@ function Pill() {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    setUser(null)
+    setUser(null);
     goHome("/");
   };
 
   return (
     <>
-      <div className="bg-[var(--secondary-color)] h-14 rounded-s-full min-w-[230px] xsm:w-[300px] sm:w-[250px]" >
-        <div className="flex pr-1 xsm:pr-2 pl-2 items-center justify-center h-full text-white font-roboto cursor-pointer" onClick={handleMenuToggle}>
+      <div className="bg-[var(--secondary-color)] h-14 pl-3 rounded-s-full min-w-fit xsm:min-w-[300px] sm:min-w-[250px] md:min-w-[200px] lg:min-w-[300px] z-50">
+        <div
+          className="flex items-center justify-center h-full text-white font-roboto cursor-pointer"
+          onClick={handleMenuToggle}
+        >
           {user ? (
             <div className="flex items-center">
               <span className="mx-12 uppercase">{user.nombre_usuario}</span>

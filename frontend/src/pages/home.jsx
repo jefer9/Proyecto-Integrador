@@ -9,7 +9,7 @@ function Home() {
   return (
     <>
       <div className=" main-content flex flex-col">
-        <div className=" w-full flex items-center justify-between md:h-32 mt-4 sm:mt-0">
+        <div className=" w-full flex items-center justify-between md:h-32 mt-4 md:mt-0">
           {/* barra de navegacion y componente para el login y el registro */}
           <Nav />
           <Pill />
@@ -22,7 +22,7 @@ function Home() {
             <p className="text-[50px] sm:text-[70px] md:text-[80px] font-black tracking-high text-[var(--primary-color)] md:h-32">
               DIGITAL
             </p>
-            <p className=" text-lg font-light md:w-3/4">
+            <p className=" text-lg font-light md:w-3/4 z-50">
               Sumérgete en un vasto océano de conocimiento con un solo click
             </p>
           </div>
