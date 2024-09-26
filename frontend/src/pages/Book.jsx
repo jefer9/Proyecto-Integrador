@@ -43,7 +43,7 @@ function Book() {
     return <p>Cargando...</p>;
   }
 
-  const imageUrl = `http://localhost:8000${libro.image_path}`;
+  const imageUrl = `http://localhost:8000/${libro.image_path}`;
 
   return (
     <div className="main-content">

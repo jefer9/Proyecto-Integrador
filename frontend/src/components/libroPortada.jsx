@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function LibroPortada({ libro }) {
 
-  const imageUrl = `http://localhost:8000${libro.image_path}`
+  const imageUrl = `http://localhost:8000/${libro.image_path}`
 
   return (
     <div className=" text-center flex flex-col">

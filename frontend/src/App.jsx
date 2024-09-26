@@ -9,6 +9,7 @@ import Contacto from "./pages/contact";
 import Profile from "./pages/profile";
 import Admin from "./pages/admin";
 import ProtectedRoute from "./components/protectedRoute";
+import AddBook from "./pages/addBook";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/AddBook" element={<AddBook/>}/>
           <Route
           path="/Admin"
           element={

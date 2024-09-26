@@ -55,7 +55,7 @@ function Galery() {
   const handleGenFilter = (gen) => {
     setSelectGen(gen);
     filterBooks(searchTerm, gen);
-    setIsFilterOpen(false)
+    setIsFilterOpen(false);
   };
 
   //
@@ -75,8 +75,10 @@ function Galery() {
   };
 
   return (
+    <>
+    
     <div className="main-content">
-      <div className=" w-full flex items-center justify-between md:h-32 mt-4 sm:mt-0">
+      <div className=" w-full flex items-center justify-between md:h-32 mt-4 md:mt-0 ">
         {/* barra de navegacion y componente para el login y el registro */}
         <Nav />
         <Pill />
@@ -110,7 +112,9 @@ function Galery() {
               <ul className="flex flex-col gap-2">
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === ""
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("")}
                 >
@@ -118,7 +122,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Ficcion" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Ficcion"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Ficcion")}
                 >
@@ -126,7 +132,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Matemáticas" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Matemáticas"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Matemáticas")}
                 >
@@ -134,7 +142,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Realismo mágico" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Realismo mágico"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Realismo mágico")}
                 >
@@ -142,7 +152,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Aventura" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Aventura"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Aventura")}
                 >
@@ -150,7 +162,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Novela psicológica" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Novela psicológica"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Novela psicológica")}
                 >
@@ -158,7 +172,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Filosofía" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Filosofía"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Filosofía")}
                 >
@@ -166,7 +182,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Novela de formación" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Novela de formación"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Novela de formación")}
                 >
@@ -174,7 +192,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Existencialismo" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Existencialismo"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Existencialismo")}
                 >
@@ -182,7 +202,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Poesía épica" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Poesía épica"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Poesía épica")}
                 >
@@ -190,7 +212,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Ciencia" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Ciencia"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Ciencia")}
                 >
@@ -198,7 +222,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Ensayo" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Ensayo"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Ensayo")}
                 >
@@ -206,7 +232,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Novela" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Novela"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Novela")}
                 >
@@ -214,7 +242,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Épica" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Épica"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Épica")}
                 >
@@ -222,7 +252,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Autobiografía" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Autobiografía"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Autobiografía")}
                 >
@@ -230,7 +262,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Novela corta" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Novela corta"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Novela corta")}
                 >
@@ -238,7 +272,9 @@ function Galery() {
                 </li>
                 <li
                   className={`cursor-pointer ${
-                    selectGen === "Tragedia" ? "font-bold text-[var(--secondary-color)]" : ""
+                    selectGen === "Tragedia"
+                      ? "font-bold text-[var(--secondary-color)]"
+                      : ""
                   }`}
                   onClick={() => handleGenFilter("Tragedia")}
                 >
@@ -253,7 +289,9 @@ function Galery() {
                 <ul className="flex flex-col gap-2">
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === ""
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("")}
                   >
@@ -261,7 +299,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Ficcion" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Ficcion"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Ficcion")}
                   >
@@ -269,7 +309,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Matemáticas" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Matemáticas"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Matemáticas")}
                   >
@@ -277,7 +319,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Realismo mágico" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Realismo mágico"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Realismo mágico")}
                   >
@@ -285,7 +329,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Aventura" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Aventura"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Aventura")}
                   >
@@ -293,7 +339,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Novela psicológica" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Novela psicológica"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Novela psicológica")}
                   >
@@ -301,7 +349,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Filosofía" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Filosofía"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Filosofía")}
                   >
@@ -309,7 +359,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Novela de formación" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Novela de formación"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Novela de formación")}
                   >
@@ -317,7 +369,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Existencialismo" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Existencialismo"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Existencialismo")}
                   >
@@ -325,7 +379,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Poesía épica" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Poesía épica"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Poesía épica")}
                   >
@@ -333,7 +389,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Ciencia" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Ciencia"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Ciencia")}
                   >
@@ -341,7 +399,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Ensayo" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Ensayo"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Ensayo")}
                   >
@@ -349,7 +409,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Novela" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Novela"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Novela")}
                   >
@@ -357,7 +419,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Épica" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Épica"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Épica")}
                   >
@@ -365,7 +429,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Autobiografía" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Autobiografía"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Autobiografía")}
                   >
@@ -373,7 +439,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Novela corta" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Novela corta"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Novela corta")}
                   >
@@ -381,7 +449,9 @@ function Galery() {
                   </li>
                   <li
                     className={`cursor-pointer ${
-                      selectGen === "Tragedia" ? "font-bold text-[var(--secondary-color)]" : ""
+                      selectGen === "Tragedia"
+                        ? "font-bold text-[var(--secondary-color)]"
+                        : ""
                     }`}
                     onClick={() => handleGenFilter("Tragedia")}
                   >
@@ -406,6 +476,7 @@ function Galery() {
       </div>
       <Footer />
     </div>
+  </>
   );
 }
 

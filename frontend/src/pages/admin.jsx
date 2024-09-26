@@ -86,7 +86,7 @@ function Admin() {
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
             <button className="w-full md:w-3/12 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-2 px-3 md:py-3 md:px-5 rounded-lg">
-              Agregar
+              <Link to={"/AddBook"}>Agregar</Link>
             </button>
           </div>
 
@@ -108,7 +108,7 @@ function Admin() {
                       <td className=" text-gray-500/90">{book.titulo}</td>
                       <td className="text-gray-500/90">{book.stock}</td>
                       <Link to={"/Galery/Book/" + book.id}>
-                        <td className="text-[var(--primary-color)] font-semibold cursor-pointer">
+                        <td className="text-[var(--primary-color)] font-semibold cursor-pointer pt-2">
                           ver+
                         </td>
                       </Link>
