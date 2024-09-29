@@ -25,11 +25,12 @@ function Pill() {
     localStorage.removeItem("token");
     setUser(null);
     goHome("/");
+    window.location.reload();
   };
 
   return (
     <>
-      <div className="bg-[var(--secondary-color)] h-14 pl-3 rounded-s-full min-w-fit xsm:min-w-[300px] sm:min-w-[250px] md:min-w-[200px] lg:min-w-[300px] z-50">
+      <div className="bg-[var(--secondary-color)] h-14 pl-3 rounded-s-full min-w-fit xsm:min-w-[300px] sm:min-w-[250px] md:min-w-[200px] lg:min-w-[300px] z-10">
         <div
           className="flex items-center justify-center h-full text-white font-roboto cursor-pointer"
           onClick={handleMenuToggle}

@@ -66,6 +66,7 @@ function SignIn() {
               goHome("/");
             }
             alert("login exitoso");
+            window.location.reload();
           } else {
             alert("Error al obtener datos del usuario");
           }

@@ -45,23 +45,27 @@ function Nav() {
         {/* menu de escritorio */}
         <ul className="md:flex gap-8 pt-2 text-[var(--secondary-color)] hidden">
           <li>
-            <Link to="/" className="link-underline">
+            <Link to="/" className="
+            ">
               INICIO
             </Link>
           </li>
           <li>
-            <Link to="/Galery" className="link-underline">
+            <Link to="/Galery" className="
+            ">
               GALERÍA
             </Link>
           </li>
           <li>
-            <Link to="/Contacto" className="link-underline">
+            <Link to="/Contacto" className="
+            ">
               CONTACTO
             </Link>
           </li>
           {isAdmin && (
             <li>
-              <Link to="/Admin" className="link-underline">
+              <Link to="/Admin" className="
+              ">
                 ADMINISTRACIÓN
               </Link>
             </li>
@@ -82,19 +86,22 @@ function Nav() {
             `}
           >
             <li>
-              <Link to="/" className="link-underline" onClick={closeMenu}>
+              <Link to="/" className="
+              " onClick={closeMenu}>
                 INICIO
               </Link>
             </li>
             <li>
-              <Link to="/Galery" className="link-underline" onClick={closeMenu}>
+              <Link to="/Galery" className="
+              " onClick={closeMenu}>
                 GALERÍA
               </Link>
             </li>
             <li>
               <Link
                 to="/Contacto"
-                className="link-underline"
+                className="
+                "
                 onClick={closeMenu}
               >
                 CONTACTO
@@ -102,7 +109,8 @@ function Nav() {
             </li>
             {isAdmin && (
               <li>
-                <Link to="/Admin" className="link-underline">
+                <Link to="/Admin" className="
+                ">
                   ADMINISTRACIÓN
                 </Link>
               </li>

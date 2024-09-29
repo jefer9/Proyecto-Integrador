@@ -85,9 +85,12 @@ function Admin() {
               className="block w-full mt-2 px-3 py-1 border-b-2 border-0
               focus:border-[var(--secondary-color)] focus:outline-none border-gray-400"
             />
-            <button className="w-full md:w-3/12 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-2 px-3 md:py-3 md:px-5 rounded-lg">
-              <Link to={"/AddBook"}>Agregar</Link>
-            </button>
+            <Link
+              to={"/AddBook"}
+              className="w-full md:w-3/12 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-2 px-3 md:py-3 md:px-5 rounded-lg text-center"
+            >
+              <button className="">Agregar</button>
+            </Link>
           </div>
 
           <div className=" w-full md:my-8 my-4 ">
@@ -123,9 +126,6 @@ function Admin() {
         </div>
         <Footer />
       </div>
-      {/* {modalOpen && selectBook && (
-        <ModalBook book={selectBook} closeModal={closeModal} />
-      )} */}
     </>
   );
 }

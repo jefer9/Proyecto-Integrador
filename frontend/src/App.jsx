@@ -10,6 +10,7 @@ import Profile from "./pages/profile";
 import Admin from "./pages/admin";
 import ProtectedRoute from "./components/protectedRoute";
 import AddBook from "./pages/addBook";
+import EditBook from "./pages/editBook";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/AddBook" element={<AddBook/>}/>
+          <Route path="/EditBook/Book/:id" element={<EditBook/>}/>
           <Route
           path="/Admin"
           element={

@@ -469,7 +469,7 @@ function Galery() {
                 <LibroPortada libro={libro} key={index} />
               ))
             ) : (
-              <p>No existe ningun libro con ese titulo</p>
+              <p className="font-semibold text-lg text-[var(--primary-color)]">Nada por aqui...</p>
             )}
           </div>
         </div>
