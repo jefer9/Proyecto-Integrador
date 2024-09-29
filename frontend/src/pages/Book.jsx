@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
 import { useEffect, useState } from "react";
+import ModalDelete from "../components/modalDelete";
 
 function Book() {
   let { id } = useParams();
@@ -10,6 +11,7 @@ function Book() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:8000/libros/${id}`)
@@ -42,6 +44,14 @@ function Book() {
   if (loading) {
     return <p>Cargando...</p>;
   }
+
+  const OpenModal = () => {
+    setModal(!modal);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
 
   const imageUrl = `http://localhost:8000/${libro.image_path}`;
 
@@ -82,9 +92,27 @@ function Book() {
                 {libro.genero}
               </p>
               {isAdmin === true ? (
+                <p className="mt-2 text-[var(--primary-color)]">
+                  <strong>Stock: </strong>
+                  {libro.stock}
+                </p>
+              ) : (
+                ""
+              )}
+              {isAdmin === true ? (
                 <div className="flex justify-around mt-5 md:mt-10  text-white">
-                  <button className=" bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] py-3 px-5 rounded-lg w-2/5">Editar</button>
-                  <button className=" bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] py-3 px-5 rounded-lg w-2/5">Eliminar</button>
+                  <Link
+                    to={"/EditBook/Book/" + libro.id}
+                    className=" bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] py-3 px-5 rounded-lg w-2/5 text-center"
+                  >
+                    Editar
+                  </Link>
+                  <button
+                    className=" bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] py-3 px-5 rounded-lg w-2/5"
+                    onClick={OpenModal}
+                  >
+                    Eliminar
+                  </button>
                 </div>
               ) : (
                 <button className="mt-5 md:mt-10 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg w-full">
@@ -93,6 +121,7 @@ function Book() {
               )}
             </div>
           </div>
+          {modal && <ModalDelete book={libro} closeModal={closeModal} />}
         </div>
       </div>
       <Footer />
