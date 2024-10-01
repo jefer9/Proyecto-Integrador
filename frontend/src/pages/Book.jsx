@@ -4,6 +4,7 @@ import Nav from "../components/nav";
 import Pill from "../components/pill";
 import { useEffect, useState } from "react";
 import ModalDelete from "../components/modalDelete";
+import Swal from "sweetalert2";
 
 function Book() {
   let { id } = useParams();
@@ -52,6 +53,14 @@ function Book() {
   const closeModal = () => {
     setModal(false);
   };
+
+  const showSwal = () => {
+    Swal.fire({
+      title: "Error",
+      text: "Esta función aún no esta disponible",
+      icon: "error",
+    })
+  }
 
   const imageUrl = `http://localhost:8000/${libro.image_path}`;
 
@@ -115,7 +124,9 @@ function Book() {
                   </button>
                 </div>
               ) : (
-                <button className="mt-5 md:mt-10 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg w-full">
+                <button 
+                className="mt-5 md:mt-10 bg-[var(--secondary-color)] hover:bg-[var(--primary-color)] text-white py-3 px-5 rounded-lg w-full"
+                onClick={showSwal}>
                   Reservar
                 </button>
               )}

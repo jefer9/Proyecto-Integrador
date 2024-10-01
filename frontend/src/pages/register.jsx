@@ -3,6 +3,7 @@ import Footer from "../components/footer";
 import Nav from "../components/nav";
 import Pill from "../components/pill";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Register() {
   const goLogin = useNavigate();
@@ -40,7 +41,10 @@ function Register() {
     };
 
     if (!formData.terminos) {
-      alert("Debe aceptar los términos y condiciones.");
+      Swal.fire({
+        title: "Error",
+        text: "Debes aceptar los términos y condiciones.",
+      });
       return;
     } else {
       try {
@@ -59,14 +63,25 @@ function Register() {
         const data = await response.json();
 
         if (response.ok) {
-          alert(data.message);
-          goLogin("/SignIn");
+          Swal.fire({
+            title: data.message,
+            icon: "success",
+            confirmButtonText: "Continuar",
+          }).then(() => {
+            goLogin("/SignIn");
+          });
         } else {
-          alert(data.detail);
+          Swal.fire({
+            title: data.detail,
+            icon: "error",
+          })
         }
       } catch (error) {
         console.error("Error:", error);
-        alert("Hubo un error al registrar al usuario.");
+        Swal.fire({
+          title: "Hubo un error al registrar al usuario",
+          icon: "error",
+        })
       }
     }
   };
@@ -87,7 +102,10 @@ function Register() {
           className=" w-full grid grid-cols-1 md:grid-cols-2 my-5 gap-y-3 gap-x-12"
         >
           <div>
-            <label htmlFor="nombre" className="text-[var(--secondary-color)] font-semibold">
+            <label
+              htmlFor="nombre"
+              className="text-[var(--secondary-color)] font-semibold"
+            >
               Nombre:
             </label>
             <input
@@ -102,7 +120,10 @@ function Register() {
             />
           </div>
           <div>
-            <label htmlFor="apellido" className="text-[var(--secondary-color)] font-semibold">
+            <label
+              htmlFor="apellido"
+              className="text-[var(--secondary-color)] font-semibold"
+            >
               Apellido:
             </label>
             <input
@@ -117,7 +138,10 @@ function Register() {
             />
           </div>
           <div>
-            <label htmlFor="correo" className="text-[var(--secondary-color)] font-semibold">
+            <label
+              htmlFor="correo"
+              className="text-[var(--secondary-color)] font-semibold"
+            >
               Correo:
             </label>
             <input
@@ -132,7 +156,10 @@ function Register() {
             />
           </div>
           <div>
-            <label htmlFor="cedula" className="text-[var(--secondary-color)] font-semibold">
+            <label
+              htmlFor="cedula"
+              className="text-[var(--secondary-color)] font-semibold"
+            >
               Cedula:
             </label>
             <input
@@ -147,7 +174,10 @@ function Register() {
             />
           </div>
           <div>
-            <label htmlFor="telefono" className="text-[var(--secondary-color)] font-semibold">
+            <label
+              htmlFor="telefono"
+              className="text-[var(--secondary-color)] font-semibold"
+            >
               Telefono:
             </label>
             <input
@@ -183,19 +213,21 @@ function Register() {
             <label htmlFor="tipo" className="mr-3">
               Tipo de usuario:
             </label>
-            <select name="tipo"
+            <select
+              name="tipo"
               id="tipo"
               className=""
               value={formData.tipo}
               required
-              onChange={handleChange}>
-                <option value={""} className="">Selecciona una opcion:</option>
-                <option value={"estudiante"}>Estudiante</option>
-                <option value={"profesor"}>Profesor</option>
-                <option value={"administrador"}>Administrador</option>
-
+              onChange={handleChange}
+            >
+              <option value={""} className="">
+                Selecciona una opcion:
+              </option>
+              <option value={"estudiante"}>Estudiante</option>
+              <option value={"profesor"}>Profesor</option>
+              <option value={"administrador"}>Administrador</option>
             </select>
-            
           </div>
           <div>
             <input

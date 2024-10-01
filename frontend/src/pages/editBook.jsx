@@ -3,6 +3,7 @@ import Nav from "../components/nav";
 import Pill from "../components/pill";
 import { useEffect, useState } from "react";
 import Footer from "../components/footer";
+import Swal from "sweetalert2";
 
 function EditBook() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ function EditBook() {
     autor: "",
     añoCreacion: "",
     genero: "",
+    imagen: null,
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,6 +45,10 @@ function EditBook() {
     });
   };
 
+  const handleFileChange = (e) => {
+    setLibro({ ...libro, imagen: e.target.files[0] });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -56,11 +62,20 @@ function EditBook() {
       if (!response.ok) {
         throw new Error("Error al editar el libro");
       }
-      alert("Libro actualizado exitosamente");
-      navigate(`/Galery/Book/${id}`);
+      Swal.fire({
+        title: "Libro actualizado exitosamente",
+        icon: "success",
+        confirmButtonText: "Continuar",
+      }).then(() => {
+        navigate(`/Galery/Book/${id}`);
+      })
     } catch (error) {
       console.error("Error al editar el libro", error);
-      alert("Ocurrió un error al intentar editar el libro");
+      Swal.fire({
+        title: "Error al editar el libro",
+        text: "Ocurrió un error al intentar editar el libro",
+        icon: "error",
+      })
     }
   };
 
@@ -160,7 +175,7 @@ function EditBook() {
               />
             </div>
 
-            <div className="flex flex-col md:col-span-2 w-full">
+            <div className="flex flex-col w-full">
               <label className="text-[var(--secondary-color)] font-semibold">
                 Sinopsis:
               </label>
@@ -171,6 +186,13 @@ function EditBook() {
                 className="border-2 focus:outline-none focus:border-[var(--secondary-color)] w-full h-32 rounded-md p-2 mt-4 text-gray-500"
                 required
               ></textarea>
+            </div>
+
+            <div className="flex flex-col w-full">
+              <label className="text-[var(--secondary-color)] font-semibold">
+                Escoge una imagen:
+              </label>
+              <input type="file" accept="image/*" onChange={handleFileChange} />
             </div>
 
             <button
