@@ -39,13 +39,13 @@ function Pill() {
             <div className="flex items-center">
               <span className="mx-12 uppercase">{user.nombre_usuario}</span>
               {menuOpen && (
-                <div className="absolute right-1 mt-[105px] w-40 bg-[var(--secondary-color)] text-white shadow-lg z-10">
-                  {/* <Link
-                    to="/profile"
+                <div className="absolute right-1 xsm:right-5 md:right-6 mt-[140px] w-40 bg-[var(--secondary-color)] text-white shadow-lg z-10 ">
+                  <Link
+                    to="/Profile"
                     className="block px-4 py-2 hover:bg-[var(--hover-color)]"
                   >
                     Perfil
-                  </Link> */}
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="block w-full text-left px-4 py-2 hover:bg-[var(--hover-color)]"

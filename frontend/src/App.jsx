@@ -31,6 +31,7 @@ function App() {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/AddBook" element={<AddBook/>}/>
           <Route path="/EditBook/Book/:id" element={<EditBook/>}/>
+          <Route path="/Profile" element={<Profile/>}/>
           <Route
           path="/Admin"
           element={
